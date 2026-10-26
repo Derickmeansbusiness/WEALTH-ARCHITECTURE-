@@ -1,0 +1,28 @@
+/* Chapter 12 — Offshore Asset Protection */
+.ch12-diagram-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.ch12-diagram-wrap svg { min-width: 680px; }
+.ch12-caption { font-size: 0.85rem; color: var(--ivory-3); margin-top: 10px; line-height: 1.55; }
+.ch12-legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 0.74rem; color: var(--ivory-3); margin-top: 8px; }
+.ch12-legend span::before { content: ''; display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: -1px; }
+.ch12-legend .cred::before { background: var(--red); }
+.ch12-legend .trust::before { background: var(--violet); }
+.ch12-legend .report::before { background: var(--blue); }
+.ch12-legend .barrier::before { background: var(--gold); }
+
+.ch12-seg { display: inline-flex; border: 1px solid var(--line-strong); border-radius: 999px; overflow: hidden; }
+.ch12-seg button { background: transparent; border: 0; color: var(--ivory-2); padding: 8px 14px; font-size: 0.8rem; letter-spacing: 0.03em; }
+.ch12-seg button.on { background: rgba(201,169,97,0.15); color: var(--gold-2); }
+
+.ch12-item { border: 1px solid var(--line); border-radius: var(--r-md); padding: 14px 16px; background: var(--glass); display: grid; grid-template-columns: 150px 1fr; gap: 14px; }
+@media (max-width: 680px) { .ch12-item { grid-template-columns: 1fr; } }
+.ch12-item .form { font-family: var(--font-mono); font-size: 0.86rem; color: var(--gold-2); line-height: 1.4; }
+.ch12-item h5 { margin: 0 0 4px; font-size: 0.98rem; color: var(--ivory); font-weight: 500; }
+.ch12-item p { margin: 0 0 6px; font-size: 0.82rem; color: var(--ivory-2); line-height: 1.5; }
+.ch12-item .k { font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ivory-3); margin-right: 6px; }
+.ch12-item .auth { font-size: 0.74rem; color: var(--ivory-3); font-family: var(--font-mono); }
+
+.ch12-meter { display: flex; gap: 4px; }
+.ch12-meter i { flex: 1; height: 8px; border-radius: 3px; background: rgba(255,255,255,0.06); }
+.ch12-meter i.on { background: var(--gold); }
+.ch12-meter i.on.hot { background: var(--red); }
+.ch12-situs { font-size: 0.8rem; color: var(--ivory-2); padding-left: 16px; margin: 6px 0 0; line-height: 1.5; }

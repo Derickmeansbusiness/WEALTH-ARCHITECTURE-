@@ -1,0 +1,20 @@
+/* Chapter 06 — Trust Architecture */
+.ch06-diagram-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.ch06-diagram-wrap svg { min-width: 560px; }
+.ch06-toggle-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+.ch06-toggle { display: inline-flex; border: 1px solid var(--line-strong); border-radius: 999px; overflow: hidden; }
+.ch06-toggle button { background: transparent; border: 0; color: var(--ivory-3); font: inherit; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 6px 12px; cursor: pointer; transition: background 0.2s, color 0.2s; }
+.ch06-toggle button.on { background: rgba(201,169,97,0.15); color: var(--gold-2); }
+.ch06-toggle button:hover { color: var(--ivory); }
+.ch06-caption { font-size: 0.82rem; color: var(--ivory-3); margin-top: 10px; line-height: 1.55; }
+.ch06-flag { border-left: 2px solid var(--line-strong); padding: 10px 14px; background: var(--glass); border-radius: 0 var(--r-md) var(--r-md) 0; }
+.ch06-flag.green { border-color: var(--green-2); }
+.ch06-flag.amber { border-color: var(--amber); }
+.ch06-flag.red { border-color: var(--red); }
+.ch06-flag.blue { border-color: var(--blue); }
+.ch06-flag.violet { border-color: var(--violet); }
+.ch06-flag .t { font-weight: 600; color: var(--ivory); font-size: 0.92rem; margin-bottom: 4px; }
+.ch06-flag .d { font-size: 0.84rem; color: var(--ivory-2); line-height: 1.55; margin: 0; }
+.ch06-flag .c { font-size: 0.66rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ivory-3); margin-bottom: 4px; }
+@keyframes ch06-breathe { 0%, 100% { opacity: 0.35; } 50% { opacity: 0.9; } }
+.ch06-breathe { animation: ch06-breathe 2.8s ease-in-out infinite; }

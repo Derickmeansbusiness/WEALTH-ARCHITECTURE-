@@ -1,0 +1,60 @@
+/* Money Flow Simulator */
+.mf-layout { display: grid; grid-template-columns: minmax(0, 1.9fr) minmax(300px, 1fr); gap: 16px; align-items: start; }
+.mf-stage-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.mf-stage { min-width: 720px; width: 100%; height: auto; display: block; }
+.mf-stage .mf-node { cursor: default; transition: filter 0.3s var(--ease); }
+.mf-stage .mf-node rect { fill: rgba(17, 20, 27, 0.92); stroke: var(--line-strong); stroke-width: 1.2; transition: stroke 0.3s, filter 0.3s; }
+.mf-stage .mf-node.external rect { stroke-dasharray: 3 4; fill: rgba(11, 13, 18, 0.7); }
+.mf-stage .mf-node.active rect { filter: drop-shadow(0 0 10px rgba(201, 169, 97, 0.45)); }
+.mf-stage .mf-node .mf-title { font-size: 12.5px; fill: var(--ivory); font-weight: 500; letter-spacing: 0.02em; }
+.mf-stage .mf-node .mf-sub { font-size: 9px; fill: var(--ivory-3); letter-spacing: 0.08em; text-transform: uppercase; }
+.mf-stage .mf-node .mf-cash { font-family: var(--font-mono); font-size: 10.5px; fill: var(--gold-2); }
+.mf-stage .mf-edge { fill: none; stroke: rgba(243, 236, 220, 0.14); stroke-width: 1.2; transition: stroke 0.3s, stroke-width 0.3s; }
+.mf-stage .mf-edge.done { stroke: rgba(201, 169, 97, 0.45); }
+.mf-stage .mf-edge.live { stroke: var(--gold); stroke-width: 1.8; }
+.mf-stage .mf-edge.selected { stroke: var(--gold-2); stroke-width: 2.4; }
+.mf-stage .mf-hit { fill: none; stroke: transparent; stroke-width: 18; cursor: pointer; }
+.mf-stage .mf-hit:hover + .mf-edge { stroke: var(--gold-2); }
+.mf-stage .mf-packet { cursor: pointer; }
+.mf-stage .mf-packet circle.core { fill: var(--gold-2); }
+.mf-stage .mf-packet circle.halo { fill: rgba(201, 169, 97, 0.25); animation: pulse 1.2s ease-in-out infinite; }
+.mf-stage .mf-packet text { font-family: var(--font-mono); font-size: 10.5px; fill: var(--ivory); paint-order: stroke; stroke: rgba(6, 7, 10, 0.9); stroke-width: 3px; }
+.mf-stage .mf-pulse { fill: none; stroke: var(--gold); stroke-width: 1.5; pointer-events: none; }
+.mf-stage .mf-arrow { fill: rgba(243, 236, 220, 0.35); }
+.mf-stage .mf-stepnum { font-family: var(--font-mono); font-size: 9px; fill: var(--ivory-3); }
+
+.mf-ledger { max-height: 560px; overflow: auto; }
+.mf-ledger tr { cursor: pointer; }
+.mf-ledger tr.pending td { opacity: 0.35; }
+.mf-ledger tr.live td { color: var(--gold-2); background: rgba(201, 169, 97, 0.06); }
+.mf-ledger tr.selected td { background: rgba(201, 169, 97, 0.1); }
+.mf-ledger .mf-dir { font-size: 0.7rem; color: var(--ivory-3); letter-spacing: 0.04em; }
+
+.mf-controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.mf-progress { height: 4px; background: rgba(255, 255, 255, 0.06); border-radius: 999px; overflow: hidden; flex: 1; min-width: 120px; }
+.mf-progress > div { height: 100%; background: linear-gradient(90deg, var(--gold-3), var(--gold-2)); transition: width 0.15s linear; }
+
+.mf-inputs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+
+.mf-why h4 { margin: 14px 0 4px; font-family: var(--font-body); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); font-weight: 500; }
+.mf-why p, .mf-why li { font-size: 0.9rem; }
+.mf-why ul { margin: 0; padding-left: 18px; color: var(--ivory-2); }
+
+.mf-bs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.mf-bs-card { padding: 14px 16px; border: 1px solid var(--line); border-radius: var(--r-md); background: var(--glass); transition: border-color 0.3s; }
+.mf-bs-card.active { border-color: rgba(201, 169, 97, 0.5); }
+.mf-bs-card .mf-bs-row { display: flex; justify-content: space-between; gap: 8px; font-size: 0.78rem; padding: 2px 0; }
+.mf-bs-card .mf-bs-row span:last-child { font-family: var(--font-mono); color: var(--ivory); }
+.mf-bs-card .mf-bs-head { font-size: 0.66rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ivory-3); margin: 8px 0 2px; }
+.mf-bs-card .mf-bs-eq { border-top: 1px solid var(--line); margin-top: 6px; padding-top: 6px; font-weight: 500; }
+.mf-bs-card .mf-bs-eq span:last-child { color: var(--gold-2); }
+.mf-bs-ext { display: flex; flex-wrap: wrap; gap: 8px; }
+.mf-bs-ext .chip { text-transform: none; letter-spacing: 0.02em; font-size: 0.74rem; }
+
+@media (max-width: 1024px) {
+  .mf-layout { grid-template-columns: 1fr; }
+  .mf-bs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 680px) {
+  .mf-inputs, .mf-bs { grid-template-columns: 1fr; }
+}

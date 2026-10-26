@@ -1,0 +1,180 @@
+/* ── Academy module styles (prefix .acad-) ───────────────────────── */
+
+/* Index: cinematic header */
+.acad-hero {
+  position: relative;
+  padding: clamp(28px, 5vw, 56px) clamp(20px, 4vw, 48px);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  background:
+    radial-gradient(ellipse at 20% 0%, rgba(201,169,97,0.12), transparent 55%),
+    linear-gradient(180deg, var(--glass-strong), var(--glass));
+  overflow: hidden;
+}
+.acad-hero::after {
+  content: '';
+  position: absolute; inset: 0; pointer-events: none;
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse at 80% 50%, rgba(0,0,0,0.8), transparent 70%);
+}
+.acad-hero > * { position: relative; z-index: 1; }
+.acad-hero-grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr); gap: 32px; align-items: end; }
+@media (max-width: 900px) { .acad-hero-grid { grid-template-columns: 1fr; } }
+
+/* Index: timeline of chapters */
+.acad-timeline { position: relative; display: flex; flex-direction: column; gap: 0; }
+.acad-timeline-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr);
+  gap: 18px;
+  padding: 14px 0;
+}
+.acad-timeline-rail { position: relative; display: flex; flex-direction: column; align-items: center; }
+.acad-timeline-rail .acad-conn {
+  position: absolute; left: 50%; top: 44px; bottom: -14px; width: 1px;
+  background: linear-gradient(180deg, var(--line-strong), var(--line));
+  transform: translateX(-50%);
+}
+.acad-timeline-item:last-child .acad-conn { display: none; }
+.acad-timeline-rail .acad-conn.done { background: linear-gradient(180deg, var(--gold), rgba(201,169,97,0.25)); }
+.acad-node {
+  width: 44px; height: 44px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid var(--line-strong); background: var(--bg-2);
+  font-family: var(--font-mono); font-size: 0.78rem; color: var(--ivory-3);
+  transition: all 0.3s var(--ease);
+  position: relative; z-index: 1;
+}
+.acad-node.visited { border-color: var(--gold); color: var(--gold-2); box-shadow: 0 0 0 4px rgba(201,169,97,0.08); }
+.acad-node.done { border-color: var(--green-2); color: var(--green-2); background: rgba(62,160,118,0.12); box-shadow: 0 0 0 4px rgba(62,160,118,0.08); }
+.acad-node.next { border-color: var(--gold); color: #1a1508; background: linear-gradient(180deg, var(--gold-2), var(--gold)); box-shadow: 0 0 24px rgba(201,169,97,0.3); }
+.acad-timeline-card {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; align-items: center;
+  padding: 16px 20px; border: 1px solid var(--line); border-radius: var(--r-md);
+  background: var(--glass); color: inherit; transition: border-color 0.3s, transform 0.3s var(--ease), background 0.3s;
+}
+.acad-timeline-card:hover { border-color: rgba(201,169,97,0.4); background: var(--glass-strong); transform: translateX(3px); color: inherit; }
+.acad-timeline-card.next { border-color: rgba(201,169,97,0.45); box-shadow: var(--shadow-gold); }
+@media (max-width: 560px) {
+  .acad-timeline-item { grid-template-columns: 52px minmax(0, 1fr); gap: 10px; }
+  .acad-timeline-card { grid-template-columns: 1fr; padding: 14px; }
+}
+
+/* Quick links */
+.acad-quick { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 1024px) { .acad-quick { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .acad-quick { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.acad-quick a { display: block; color: inherit; height: 100%; }
+.acad-quick a:hover { border-color: rgba(201,169,97,0.4); color: inherit; }
+
+/* Chapter page layout */
+.acad-chapter { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 40px; align-items: start; }
+.acad-rail { position: sticky; top: calc(var(--nav-h) + 20px); display: flex; flex-direction: column; gap: 2px; }
+.acad-rail a {
+  display: flex; align-items: center; gap: 10px;
+  padding: 7px 10px; border-radius: 8px; color: var(--ivory-3); font-size: 0.8rem; letter-spacing: 0.01em;
+  border-left: 1px solid transparent; transition: all 0.25s var(--ease); white-space: nowrap;
+}
+.acad-rail a .idx { font-family: var(--font-mono); font-size: 0.66rem; color: var(--muted); width: 18px; }
+.acad-rail a:hover { color: var(--ivory); background: var(--glass); }
+.acad-rail a.active { color: var(--gold-2); border-left-color: var(--gold); background: rgba(201,169,97,0.06); border-radius: 0 8px 8px 0; }
+.acad-rail a.active .idx { color: var(--gold); }
+.acad-rail-progress { margin-top: 14px; padding: 12px 10px; border-top: 1px solid var(--line); }
+@media (max-width: 960px) {
+  .acad-chapter { grid-template-columns: 1fr; gap: 20px; }
+  .acad-rail {
+    position: sticky; top: var(--nav-h); z-index: 20;
+    flex-direction: row; gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch;
+    padding: 10px 0; margin: 0 -16px; padding-left: 16px; padding-right: 16px;
+    background: rgba(6,7,10,0.86); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line);
+    scrollbar-width: none;
+  }
+  .acad-rail::-webkit-scrollbar { display: none; }
+  .acad-rail a { border-left: 0; border-bottom: 1px solid transparent; border-radius: 999px; padding: 6px 12px; flex: 0 0 auto; }
+  .acad-rail a.active { border-radius: 999px; border-left: 0; border: 1px solid rgba(201,169,97,0.5); }
+  .acad-rail-progress { display: none; }
+}
+
+/* Chapter header */
+.acad-head { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 28px; align-items: start; }
+.acad-head .acad-num {
+  font-family: var(--font-mono); font-size: clamp(3.4rem, 8vw, 6.5rem); line-height: 0.9; font-weight: 300;
+  color: var(--gold); letter-spacing: -0.04em;
+  text-shadow: 0 0 40px rgba(201,169,97,0.25);
+}
+.acad-head .acad-hook { font-family: var(--font-display); font-style: italic; font-size: clamp(1.25rem, 2.2vw, 1.7rem); color: var(--gold-2); line-height: 1.35; max-width: 820px; font-weight: 400; }
+@media (max-width: 640px) { .acad-head { grid-template-columns: 1fr; gap: 12px; } }
+
+/* Sections */
+.acad-section { scroll-margin-top: calc(var(--nav-h) + 24px); margin-bottom: 56px; }
+@media (max-width: 960px) { .acad-section { scroll-margin-top: calc(var(--nav-h) + 72px); } }
+.acad-section-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 18px; }
+.acad-section-head .acad-sec-idx { font-family: var(--font-mono); color: var(--gold-3); font-size: 0.8rem; }
+.acad-prose p { font-size: 1.02rem; line-height: 1.75; }
+.acad-prose p:last-child { margin-bottom: 0; }
+
+/* Misconception */
+.acad-misc { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 760px) { .acad-misc { grid-template-columns: 1fr; } }
+
+/* Definition list */
+.acad-dl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 0; }
+@media (max-width: 760px) { .acad-dl { grid-template-columns: 1fr; } }
+.acad-dl > div { padding: 14px 16px; border: 1px solid var(--line); border-radius: var(--r-md); background: var(--glass); }
+.acad-dl dt { font-family: var(--font-display); font-size: 1.15rem; color: var(--ivory); margin-bottom: 4px; }
+.acad-dl dd { margin: 0; font-size: 0.9rem; color: var(--ivory-2); line-height: 1.6; }
+
+/* References */
+.acad-refs { display: flex; flex-direction: column; gap: 10px; }
+.acad-ref { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 14px; align-items: start; padding: 12px 16px; border: 1px solid var(--line); border-radius: var(--r-md); background: var(--glass); }
+@media (max-width: 560px) { .acad-ref { grid-template-columns: 1fr; gap: 6px; } }
+
+/* Takeaways */
+.acad-takeaways { counter-reset: tk; list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+.acad-takeaways li { counter-increment: tk; display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 12px; align-items: baseline; padding: 14px 16px; border: 1px solid rgba(201,169,97,0.25); border-radius: var(--r-md); background: rgba(201,169,97,0.04); font-size: 1rem; color: var(--ivory); line-height: 1.55; }
+.acad-takeaways li::before { content: counter(tk, decimal-leading-zero); font-family: var(--font-mono); color: var(--gold); font-size: 0.9rem; }
+
+/* Notes drawer */
+.acad-drawer { position: fixed; top: var(--nav-h); right: 0; bottom: 0; width: min(440px, 100%); z-index: 90; background: var(--bg-1); border-left: 1px solid var(--line); padding: 24px; display: flex; flex-direction: column; gap: 14px; box-shadow: -20px 0 60px rgba(0,0,0,0.5); animation: acadSlide 0.35s var(--ease) both; }
+@keyframes acadSlide { from { transform: translateX(30px); opacity: 0; } to { transform: none; opacity: 1; } }
+.acad-drawer textarea { flex: 1; min-height: 240px; resize: vertical; line-height: 1.6; }
+
+/* Footer nav */
+.acad-footnav { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+@media (max-width: 640px) { .acad-footnav { grid-template-columns: 1fr; } }
+.acad-footnav a { display: block; color: inherit; }
+.acad-footnav a:hover { border-color: rgba(201,169,97,0.4); color: inherit; }
+.acad-footnav .acad-next { text-align: right; }
+
+/* Glossary */
+.acad-gloss-letter { position: sticky; top: calc(var(--nav-h) + 8px); z-index: 2; font-family: var(--font-display); font-size: 2rem; color: var(--gold); line-height: 1; padding: 6px 0; background: linear-gradient(180deg, var(--bg-0) 70%, transparent); }
+.acad-gloss-grid { display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 20px; align-items: start; }
+@media (max-width: 560px) { .acad-gloss-grid { grid-template-columns: 1fr; gap: 6px; } .acad-gloss-letter { position: static; background: none; } }
+
+/* Diagram wrappers (used by chapters) */
+.acad-diagram-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid var(--line); border-radius: var(--r-md); background: radial-gradient(ellipse at 50% 0%, rgba(201,169,97,0.05), transparent 60%), rgba(0,0,0,0.25); padding: 12px; }
+.acad-diagram-wrap svg { min-width: 560px; }
+.acad-diagram-caption { font-size: 0.82rem; color: var(--ivory-3); margin-top: 10px; line-height: 1.55; }
+.acad-diagram-controls { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; align-items: center; }
+.acad-formula { font-family: var(--font-mono); font-size: 0.78rem; color: var(--ivory-3); padding: 10px 12px; border: 1px dashed var(--line-strong); border-radius: var(--r-sm); background: rgba(0,0,0,0.3); line-height: 1.7; overflow-x: auto; white-space: pre-wrap; }
+
+/* Simulator layout */
+.acad-sim { display: grid; grid-template-columns: minmax(0, 320px) minmax(0, 1fr); gap: 20px; align-items: start; }
+@media (max-width: 900px) { .acad-sim { grid-template-columns: 1fr; } }
+.acad-sim-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+.acad-flag { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 10px; align-items: start; padding: 10px 12px; border-radius: var(--r-sm); border: 1px solid var(--line); background: var(--glass); font-size: 0.86rem; }
+.acad-flag.red { border-color: rgba(194,90,76,0.4); }
+.acad-flag.amber { border-color: rgba(209,154,58,0.4); }
+.acad-flag.green { border-color: rgba(62,160,118,0.4); }
+
+/* Entity tree fence glow */
+@keyframes acadFence { 0%, 100% { opacity: 0.35; } 50% { opacity: 0.85; } }
+.acad-fence { stroke-dasharray: 4 6; animation: acadFence 2.8s ease-in-out infinite; }
+@keyframes acadRise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+.acad-rise { animation: acadRise 0.7s var(--ease) both; }
+@keyframes acadPulseGold { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
+.acad-pulse { animation: acadPulseGold 2s ease-in-out infinite; }

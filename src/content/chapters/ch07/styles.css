@@ -1,0 +1,15 @@
+/* Chapter 07 — The Family Bank */
+.ch07-diagram-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.ch07-diagram-wrap svg { min-width: 600px; }
+.ch07-caption { font-size: 0.82rem; color: var(--ivory-3); margin-top: 10px; line-height: 1.55; }
+.ch07-controls { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
+.ch07-bs { border: 1px solid var(--line); border-radius: var(--r-md); background: var(--glass); padding: 14px 16px; }
+.ch07-bs h4 { margin: 0 0 8px; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; font-family: var(--font-body); font-weight: 500; color: var(--ivory-3); }
+.ch07-bs .line { display: flex; justify-content: space-between; gap: 12px; font-size: 0.86rem; padding: 5px 0; border-bottom: 1px dashed var(--line); }
+.ch07-bs .line:last-child { border-bottom: 0; }
+.ch07-bs .line .v { font-family: var(--font-mono); color: var(--ivory); }
+.ch07-bs .line.green .v { color: var(--green-2); }
+.ch07-bs .line.red .v { color: #e7a398; }
+.ch07-bs .line.gold .v { color: var(--gold-2); }
+.ch07-bs .line .k { color: var(--ivory-2); }
+@keyframes ch07-coin { 0% { offset-distance: 0%; opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { offset-distance: 100%; opacity: 0; } }

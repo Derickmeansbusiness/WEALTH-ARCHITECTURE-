@@ -1,0 +1,36 @@
+/* Chapter 11 — Domestic Asset Protection */
+.ch11-diagram-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.ch11-diagram-wrap svg { min-width: 640px; }
+.ch11-caption { font-size: 0.85rem; color: var(--ivory-3); margin-top: 10px; line-height: 1.55; }
+.ch11-legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 0.74rem; color: var(--ivory-3); margin-top: 8px; }
+.ch11-legend span::before { content: ''; display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: -1px; }
+.ch11-legend .cred::before { background: var(--red); }
+.ch11-legend .fence::before { background: var(--gold); }
+.ch11-legend .gap::before { background: var(--amber); }
+.ch11-legend .asset::before { background: var(--ivory-3); }
+
+.ch11-toggle { display: flex; align-items: flex-start; gap: 12px; padding: 12px 14px; border: 1px solid var(--line); border-radius: var(--r-md); background: var(--glass); cursor: pointer; transition: border-color 0.2s; }
+.ch11-toggle:hover { border-color: var(--line-strong); }
+.ch11-toggle.on { border-color: rgba(201,169,97,0.45); }
+.ch11-toggle input { margin-top: 4px; accent-color: var(--gold); }
+.ch11-toggle .t { color: var(--ivory); font-size: 0.92rem; }
+.ch11-toggle .d { color: var(--ivory-3); font-size: 0.78rem; line-height: 1.45; }
+
+.ch11-map { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+@media (max-width: 900px) { .ch11-map { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .ch11-map { grid-template-columns: 1fr; } }
+.ch11-asset { border: 1px solid var(--line); border-radius: var(--r-md); padding: 12px 14px; background: var(--glass); display: flex; flex-direction: column; gap: 8px; }
+.ch11-asset h5 { margin: 0; font-family: var(--font-display); font-size: 1.1rem; color: var(--ivory); font-weight: 500; }
+.ch11-sev { display: flex; gap: 6px; flex-wrap: wrap; }
+.ch11-sev .k { font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ivory-3); }
+.ch11-bar { height: 4px; border-radius: 999px; background: rgba(255,255,255,0.06); overflow: hidden; }
+.ch11-bar i { display: block; height: 100%; transition: width 0.5s var(--ease), background 0.3s; }
+.ch11-asset ul { margin: 0; padding-left: 16px; font-size: 0.78rem; color: var(--ivory-3); line-height: 1.45; }
+
+.ch11-flag { border-left: 2px solid var(--line-strong); padding: 10px 14px; background: var(--glass); border-radius: 0 var(--r-md) var(--r-md) 0; }
+.ch11-flag.critical { border-color: var(--red); background: rgba(194,90,76,0.08); }
+.ch11-flag.high { border-color: #d4766a; background: rgba(194,90,76,0.05); }
+.ch11-flag.medium { border-color: var(--amber); background: rgba(209,154,58,0.05); }
+.ch11-flag.low { border-color: var(--ivory-3); }
+.ch11-flag h5 { margin: 0 0 4px; font-size: 0.95rem; color: var(--ivory); font-weight: 500; }
+.ch11-flag p { margin: 0; font-size: 0.82rem; color: var(--ivory-2); line-height: 1.5; }
