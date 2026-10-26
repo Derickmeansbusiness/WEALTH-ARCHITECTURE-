@@ -1,0 +1,56 @@
+/* ───────────────────────────────────────────────────────────────
+   THE 100-YEAR FAMILY WEALTH ARCHITECTURE — Design Tokens
+   Obsidian backgrounds · Ivory type · Champagne gold · Deep green
+   ─────────────────────────────────────────────────────────────── */
+:root {
+  /* Surfaces */
+  --bg-0: #06070a;
+  --bg-1: #0b0d12;
+  --bg-2: #11141b;
+  --bg-3: #171b24;
+  --glass: rgba(255, 255, 255, 0.035);
+  --glass-strong: rgba(255, 255, 255, 0.06);
+  --line: rgba(243, 236, 220, 0.08);
+  --line-strong: rgba(243, 236, 220, 0.16);
+  --grid: rgba(243, 236, 220, 0.035);
+
+  /* Type */
+  --ivory: #f3ecdc;
+  --ivory-2: #d9d1c0;
+  --ivory-3: #a9a293;
+  --muted: #7d776b;
+
+  /* Accents */
+  --gold: #c9a961;
+  --gold-2: #e6d4a3;
+  --gold-3: #8f7540;
+  --gold-glow: rgba(201, 169, 97, 0.22);
+  --green: #1f6b4a;
+  --green-2: #3ea076;
+  --green-glow: rgba(62, 160, 118, 0.2);
+  --amber: #d19a3a;
+  --red: #c25a4c;
+  --blue: #5b7fa6;
+  --violet: #7c6ca8;
+
+  /* Semantic */
+  --ok: var(--green-2);
+  --warn: var(--amber);
+  --danger: var(--red);
+
+  /* Typography */
+  --font-display: 'Cormorant Garamond', 'Times New Roman', Georgia, serif;
+  --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Scale */
+  --r-sm: 6px;
+  --r-md: 12px;
+  --r-lg: 20px;
+  --shadow-1: 0 1px 0 rgba(255,255,255,0.03) inset, 0 20px 60px rgba(0,0,0,0.45);
+  --shadow-gold: 0 0 0 1px rgba(201,169,97,0.35), 0 0 40px rgba(201,169,97,0.12);
+
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --nav-h: 64px;
+  --maxw: 1320px;
+}
