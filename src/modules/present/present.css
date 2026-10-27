@@ -109,7 +109,7 @@ html.present-active body::before { display: none; }
 .present-thumb .present-layer { animation: none !important; }
 
 /* ── Overview grid ────────────────────────────────────────── */
-.present-overview { position: absolute; inset: 0; z-index: 90; background: rgba(2,2,3,0.96); overflow: auto; padding: 60px 48px 80px; animation: fadeIn 0.4s var(--ease) both; }
+.present-overview { position: absolute; inset: 0; z-index: 90; background: #030304; overflow: auto; padding: 60px 48px 80px; animation: fadeIn 0.4s var(--ease) both; }
 .present-overview-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 24px; }
 .present-overview-head h3 { font-family: var(--font-display); font-weight: 400; font-size: 34px; margin: 0; color: var(--ivory); }
 .present-overview-head span { font-family: var(--font-mono); font-size: 12px; color: var(--ivory-3); letter-spacing: 0.08em; }

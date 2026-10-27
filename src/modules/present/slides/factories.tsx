@@ -79,7 +79,7 @@ export function misconceptionSlide(ch: ChapterMeta, id: string, claim: string, r
     Visual: ({ step }) => (
       <SlideFrame eyebrow={`Chapter ${pad2(ch.number)} · Misconception`} title="Claim vs reality" titleSize="md" cite={opts.cite}>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 40, alignItems: 'stretch', height: 560 }}>
-          <Glass tone="red" on={step >= 0}>
+          <Glass tone="red" on={step >= 0} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
             <div className="present-kicker" style={{ color: '#e7a398' }}>The claim</div>
             <h4 style={{ fontSize: 50, fontStyle: 'italic' }}>“{claim}”</h4>
           </Glass>

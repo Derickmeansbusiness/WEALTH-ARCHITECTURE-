@@ -8,7 +8,7 @@ import { chapterById } from '@/content/chapters/manifest';
 import { useAppStore } from '@/store/useAppStore';
 import { uid } from '@/lib/format';
 import { Chip, ConfidenceChip, Disclaimer, EmptyState, Eyebrow, Panel, Reveal, Rich, SectionHeader, SelectField, TextField, Callout } from '@/components/ui';
-import { ClaimCard } from './ClaimCard';
+import { ClaimCard, quoteClaim } from './ClaimCard';
 import './claims.css';
 
 export default function ClaimsModule() {
@@ -176,7 +176,7 @@ function ClaimDetail() {
 
       <div className="cl-layout" style={{ marginTop: 24 }}>
         <div className="cl-sections">
-          <Section title="The claim" className="quote"><p>“{claim.claim}”</p></Section>
+          <Section title="The claim" className="quote"><p>{quoteClaim(claim.claim)}</p></Section>
           <Section title="The principle"><Rich text={claim.principle} /></Section>
           <Section title="How it actually works"><List items={claim.howItWorks} /></Section>
           <div className="cl-two">

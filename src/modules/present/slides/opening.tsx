@@ -15,7 +15,7 @@ const OBJECTIVES: { o: Objective; desc: string; question: string }[] = [
 
 /** The twelve layers of the master architecture, from the individual outward. */
 const LAYER_NODES: NetNode[] = [
-  { id: 'ind', x: 840, y: 400, label: 'Individual', sub: 'Layer 01', tone: 'gold', shape: 'circle', r: 58, appearAt: 0 },
+  { id: 'ind', x: 840, y: 400, label: 'Individual', sub: 'Layer 01', tone: 'gold', shape: 'circle', r: 72, appearAt: 0 },
   { id: 'fam', x: 840, y: 150, label: 'Family', sub: 'Layer 02', tone: 'gold', shape: 'pill', w: 220, h: 76, appearAt: 1 },
   { id: 'op', x: 380, y: 640, label: 'Operating Co.', sub: 'Layer 03 · Engine', tone: 'ivory', appearAt: 2 },
   { id: 'hold', x: 840, y: 640, label: 'Holding Co.', sub: 'Layer 04', tone: 'gold', appearAt: 3 },

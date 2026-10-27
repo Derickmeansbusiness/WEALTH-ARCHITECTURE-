@@ -24,7 +24,8 @@ export function useCountUp(target: number, active: boolean, duration = 1400, del
   const [value, setValue] = useState(active ? 0 : target);
   const fromRef = useRef(0);
   useEffect(() => {
-    if (!active) { setValue(0); fromRef.current = 0; return; }
+    // Inactive (thumbnails, exiting layers): show the final value; the count-up runs from 0 when the slide becomes active.
+    if (!active) { setValue(target); fromRef.current = 0; return; }
     if (reduced || duration <= 0) { setValue(target); fromRef.current = target; return; }
     let raf = 0; let start = 0; const from = fromRef.current;
     const tick = (now: number) => {
