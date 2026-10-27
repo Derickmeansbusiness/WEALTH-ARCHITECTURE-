@@ -3,6 +3,7 @@ import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import { useAppStore } from '@/store/useAppStore';
 import { CHAPTERS } from '@/content/chapters/manifest';
 import { CurrencyToggle } from '@/components/ui';
+import './shell.css';
 
 const NAV: { to: string; label: string; group: 'learn' | 'lab' | 'knowledge' }[] = [
   { to: '/academy', label: 'Academy', group: 'learn' },
@@ -40,12 +41,11 @@ export default function AppShell() {
         <div className="container row between" style={{ height: '100%', flexWrap: 'nowrap' }}>
           <NavLink to="/" className="row" style={{ gap: 12, color: 'var(--ivory)', flexWrap: 'nowrap' }}>
             <Monogram />
-            <span className="display" style={{ fontSize: '1.05rem', letterSpacing: '0.02em', whiteSpace: 'nowrap' }}>The 100-Year Family Wealth Architecture</span>
+            <span className="display shell-title" style={{ fontSize: '1.05rem', letterSpacing: '0.02em' }}>The 100-Year Family Wealth Architecture</span>
           </NavLink>
-          <nav className="row" style={{ gap: 4, flexWrap: 'nowrap' }}>
-            <span className="tiny muted mono" style={{ marginRight: 8 }} title="Chapters completed">{completed}/{CHAPTERS.length}</span>
-            <NavLink to="/academy" className={({ isActive }) => `btn sm ${isActive ? 'active' : 'ghost'}`}>Academy</NavLink>
-            <NavLink to="/lab" className={({ isActive }) => `btn sm ${isActive ? 'active' : 'ghost'}`} style={{ display: 'none' }} id="nav-lab">Lab</NavLink>
+          <nav className="row shell-nav" style={{ gap: 4, flexWrap: 'nowrap' }}>
+            <span className="tiny muted mono shell-count" title="Chapters completed">{completed}/{CHAPTERS.length}</span>
+            <NavLink to="/academy" className={({ isActive }) => `btn sm shell-nav-academy ${isActive ? 'active' : 'ghost'}`}>Academy</NavLink>
             <NavLink to="/present" className="btn sm primary">Present</NavLink>
             <button className="btn sm" onClick={() => setOpen((o) => !o)} aria-expanded={open} aria-label="Open menu">☰ Menu</button>
           </nav>
