@@ -168,6 +168,9 @@
 .acad-sim > * { min-width: 0; }
 .acad-sim .stack, .acad-sim .field, .acad-sim .row { min-width: 0; }
 .acad-sim .row.between > .input { min-width: 0; flex: 1 1 auto; }
+.acad-sim .grid > *, .acad-sim .panel { min-width: 0; }
+.acad-sim .row.between > span { min-width: 0; }
+.acad-sim .row.between > span > span:first-child { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 @media (max-width: 900px) { .acad-sim { grid-template-columns: minmax(0, 1fr); } }
 .acad-sim-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
 .acad-flag { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 10px; align-items: start; padding: 10px 12px; border-radius: var(--r-sm); border: 1px solid var(--line); background: var(--glass); font-size: 0.86rem; }
