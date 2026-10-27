@@ -37,7 +37,8 @@ const ease = (t: number) => (t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) /
 export default function MoneyFlowPage() {
   const fmt = useMoney();
   const saveScenario = useAppStore((s) => s.saveScenario);
-  const scenarios = useAppStore((s) => s.scenarios.filter((x) => x.kind === 'money-flow'));
+  const allScenarios = useAppStore((s) => s.scenarios);
+  const scenarios = useMemo(() => allScenarios.filter((x) => x.kind === 'money-flow'), [allScenarios]);
   const deleteScenario = useAppStore((s) => s.deleteScenario);
 
   const [inputs, setInputs] = useState<FlowInputs>(DEFAULT_INPUTS);

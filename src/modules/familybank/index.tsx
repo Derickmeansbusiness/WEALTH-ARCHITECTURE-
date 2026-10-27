@@ -39,7 +39,8 @@ export default function FamilyBankPage() {
   const fmt = useMoney();
   const saveScenario = useAppStore((s) => s.saveScenario);
   const structures = useAppStore((s) => s.structures);
-  const saved = useAppStore((s) => s.scenarios.filter((x) => x.kind === 'family-bank'));
+  const allScenarios = useAppStore((s) => s.scenarios);
+  const saved = useMemo(() => allScenarios.filter((x) => x.kind === 'family-bank'), [allScenarios]);
   const deleteScenario = useAppStore((s) => s.deleteScenario);
 
   const [st, setSt] = useState<State>(DEFAULT);
