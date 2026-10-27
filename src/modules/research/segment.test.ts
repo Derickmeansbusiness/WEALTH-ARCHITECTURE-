@@ -32,8 +32,9 @@ describe('splitSentences', () => {
 
 describe('stripFillers', () => {
   it('removes verbal fillers', () => {
-    expect(stripFillers('Um, so basically trusts avoid probate, you know.')).toBe('so trusts avoid probate, .'.replace(' .', '.') === 'so trusts avoid probate.' ? stripFillers('Um, so basically trusts avoid probate, you know.') : stripFillers('Um, so basically trusts avoid probate, you know.'));
-    expect(stripFillers('Um, so basically trusts avoid probate, you know.')).not.toMatch(/um|basically|you know/i);
+    const out = stripFillers('Um, so basically trusts avoid probate, you know.');
+    expect(out).not.toMatch(/\bum\b|basically|you know/i);
+    expect(out).toMatch(/trusts avoid probate/);
   });
 });
 
