@@ -1,4 +1,5 @@
 /* Family Bank Simulator */
+.fb-layout > *, .fb-layout .stack > * { min-width: 0; }
 .fb-layout { display: grid; grid-template-columns: minmax(300px, 1fr) minmax(0, 1.7fr); gap: 16px; align-items: start; }
 .fb-inputs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 14px; }
 .fb-inputs .full { grid-column: 1 / -1; }
@@ -40,5 +41,6 @@
 
 .fb-warn { display: grid; gap: 10px; }
 
-@media (max-width: 1024px) { .fb-layout { grid-template-columns: 1fr; } }
+.fb-layout.fb-even { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+@media (max-width: 1024px) { .fb-layout, .fb-layout.fb-even { grid-template-columns: 1fr; } }
 @media (max-width: 680px) { .fb-inputs, .fb-bs, .fb-note .fb-sign { grid-template-columns: 1fr; } }

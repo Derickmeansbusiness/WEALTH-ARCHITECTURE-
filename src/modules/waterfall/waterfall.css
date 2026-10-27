@@ -1,4 +1,5 @@
 /* Family Capital Waterfall */
+.wf-layout > *, .wf-layout .stack > * { min-width: 0; }
 .wf-layout { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(300px, 1fr); gap: 16px; align-items: start; }
 .wf-stage-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 .wf-stage { min-width: 720px; width: 100%; height: auto; display: block; }

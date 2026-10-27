@@ -140,7 +140,7 @@ function ChapterView({ mod }: { mod: ChapterModule }) {
         </nav>
 
         {/* BODY */}
-        <div>
+        <div className="acad-body">
           <Section id="concept" n={1} label="Concept" title="What this chapter is really about">
             {content.concept.length ? (
               <div className="acad-prose">{content.concept.map((p, i) => <Reveal key={i} delay={Math.min(i * 0.04, 0.2)}><Rich text={p} /></Reveal>)}</div>

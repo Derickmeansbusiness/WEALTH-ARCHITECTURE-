@@ -72,8 +72,9 @@
 .acad-quick a:hover { border-color: rgba(201,169,97,0.4); color: inherit; }
 
 /* Chapter page layout */
-.acad-chapter { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 40px; align-items: start; }
-.acad-rail { position: sticky; top: calc(var(--nav-h) + 20px); display: flex; flex-direction: column; gap: 2px; }
+.acad-chapter { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 40px; align-items: start; min-width: 0; }
+.acad-body { min-width: 0; }
+.acad-rail { position: sticky; top: calc(var(--nav-h) + 20px); display: flex; flex-direction: column; gap: 2px; min-width: 0; }
 .acad-rail a {
   display: flex; align-items: center; gap: 10px;
   padding: 7px 10px; border-radius: 8px; color: var(--ivory-3); font-size: 0.8rem; letter-spacing: 0.01em;
@@ -85,11 +86,11 @@
 .acad-rail a.active .idx { color: var(--gold); }
 .acad-rail-progress { margin-top: 14px; padding: 12px 10px; border-top: 1px solid var(--line); }
 @media (max-width: 960px) {
-  .acad-chapter { grid-template-columns: 1fr; gap: 20px; }
+  .acad-chapter { grid-template-columns: minmax(0, 1fr); gap: 20px; }
   .acad-rail {
     position: sticky; top: var(--nav-h); z-index: 20;
     flex-direction: row; gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch;
-    padding: 10px 0; margin: 0 -16px; padding-left: 16px; padding-right: 16px;
+    padding: 10px 16px; margin: 0 -16px; width: calc(100% + 32px); max-width: calc(100% + 32px);
     background: rgba(6,7,10,0.86); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line);
     scrollbar-width: none;
   }

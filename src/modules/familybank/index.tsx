@@ -168,7 +168,7 @@ export default function FamilyBankPage() {
 
       {/* CHART + BALANCE SHEETS */}
       <section className="section">
-        <div className="fb-layout" style={{ gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)' }}>
+        <div className="fb-layout fb-even">
           <Panel>
             <Eyebrow>Balance and cumulative interest</Eyebrow>
             <LoanChart annual={annual} principal={st.principal} year={yr} onYear={setYear} fmt={fmt} />

@@ -1,4 +1,5 @@
 /* Money Flow Simulator */
+.mf-layout > * { min-width: 0; }
 .mf-layout { display: grid; grid-template-columns: minmax(0, 1.9fr) minmax(300px, 1fr); gap: 16px; align-items: start; }
 .mf-stage-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 .mf-stage { min-width: 720px; width: 100%; height: auto; display: block; }
