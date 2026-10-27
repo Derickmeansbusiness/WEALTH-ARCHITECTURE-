@@ -72,7 +72,7 @@ export default function StudioShell() {
           </Link>
           <nav className="ds-tabs" aria-label="Studio sections">
             {(['learn', 'tools', 'reference'] as const).map((g) => (
-              <span key={g} className="row" style={{ gap: 2, flexWrap: 'nowrap' }}>
+              <span key={g} className="row ds-tab-set" style={{ gap: 2 }}>
                 <span className="ds-tab-group">{g === 'learn' ? 'Learn' : g === 'tools' ? 'Tools' : 'Ref'}</span>
                 {TABS.filter((t) => t.group === g).map((t) => (
                   <NavLink key={t.to} to={`${STUDIO_BASE}${t.to}`} end={t.end} className={({ isActive }) => `ds-tab ${isActive ? 'active' : ''}`}>{t.label}</NavLink>

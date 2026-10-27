@@ -3,8 +3,11 @@
  * Visits every route, waits for network idle, captures console errors / page errors, and screenshots.
  * Usage: node scripts/smoke.mjs [BASE]
  */
-import { chromium } from 'playwright';
 import { mkdirSync } from 'node:fs';
+import { createRequire } from 'node:module';
+const require = createRequire(import.meta.url);
+let chromium;
+try { ({ chromium } = await import('playwright')); } catch { ({ chromium } = require('playwright')); }
 
 const BASE = process.argv[2] ?? 'http://localhost:4173';
 const ROUTES = [

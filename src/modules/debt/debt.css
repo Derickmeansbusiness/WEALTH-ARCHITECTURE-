@@ -188,3 +188,11 @@
 .ds-legend span::before { content: ''; display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; background: var(--c, var(--gold)); vertical-align: -1px; }
 
 @keyframes dsSpin { to { transform: rotate(360deg); } }
+
+/* Sub-nav: let the tab row wrap under the brand rather than clip at common desktop widths */
+@media (max-width: 1700px) {
+  .ds-tabs { flex-basis: 100%; order: 3; flex-wrap: wrap; overflow: visible; row-gap: 4px; }
+  .ds-subnav-controls { margin-left: auto; }
+}
+.ds-tab-set { flex-wrap: nowrap; }
+@media (max-width: 720px) { .ds-tab-set { flex-wrap: wrap; row-gap: 4px; } }
