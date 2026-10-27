@@ -1,0 +1,55 @@
+/* Jurisdiction Engine — module styles (prefix .jx-) */
+
+.jx-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+@media (max-width: 1024px) { .jx-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 680px) { .jx-grid { grid-template-columns: 1fr; } }
+
+.jx-card {
+  display: flex; flex-direction: column; gap: 12px; padding: 22px; height: 100%;
+  background: linear-gradient(180deg, var(--glass-strong), var(--glass));
+  border: 1px solid var(--line); border-radius: var(--r-lg); color: inherit; text-decoration: none; position: relative; overflow: hidden;
+  transition: transform 0.25s var(--ease), border-color 0.25s var(--ease), box-shadow 0.25s var(--ease);
+}
+.jx-card:hover { transform: translateY(-2px); border-color: rgba(201,169,97,0.45); box-shadow: var(--shadow-1); color: inherit; }
+.jx-card.scaffold { border-style: dashed; opacity: 0.85; }
+.jx-card .flag { font-size: 1.6rem; line-height: 1; }
+.jx-card h3 { font-size: 1.5rem; }
+.jx-card .region { font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ivory-3); }
+.jx-card .summary { font-size: 0.88rem; color: var(--ivory-2); display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; margin: 0; }
+.jx-card .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; }
+.jx-card .map { position: absolute; right: -10px; top: -10px; width: 120px; height: 120px; opacity: 0.08; pointer-events: none; }
+
+.jx-hero { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 28px; align-items: start; }
+@media (max-width: 1024px) { .jx-hero { grid-template-columns: 1fr; } }
+
+.jx-panels { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; counter-reset: jx; }
+@media (max-width: 900px) { .jx-panels { grid-template-columns: 1fr; } }
+.jx-panel { padding: 20px 22px; border-radius: var(--r-lg); border: 1px solid var(--line); background: var(--glass); position: relative; }
+.jx-panel.wide { grid-column: 1 / -1; }
+.jx-panel::before { counter-increment: jx; content: counter(jx, decimal-leading-zero); position: absolute; top: 16px; right: 20px; font-family: var(--font-mono); font-size: 0.7rem; color: var(--gold-3); }
+.jx-panel h4 { font-family: var(--font-body); font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); font-weight: 500; margin: 0 0 10px; }
+.jx-panel ul { margin: 0; padding-left: 18px; color: var(--ivory-2); font-size: 0.92rem; }
+.jx-panel li { margin-bottom: 6px; }
+.jx-panel p { font-size: 0.92rem; margin: 0; }
+.jx-panel.adv { border-color: rgba(62,160,118,0.35); }
+.jx-panel.lim { border-color: rgba(209,154,58,0.35); }
+
+/* Compare */
+.jx-pick { display: flex; flex-wrap: wrap; gap: 8px; }
+.jx-pick button { border-radius: 999px; }
+.jx-compare { width: 100%; border-collapse: collapse; font-size: 0.84rem; min-width: 760px; }
+.jx-compare th, .jx-compare td { padding: 12px 14px; border-bottom: 1px solid var(--line); vertical-align: top; text-align: left; }
+.jx-compare thead th { position: sticky; top: 0; background: var(--bg-2); z-index: 1; }
+.jx-compare th.dim { width: 180px; font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); font-weight: 500; }
+.jx-compare td ul { margin: 0; padding-left: 16px; color: var(--ivory-2); }
+.jx-compare td li { margin-bottom: 4px; }
+.jx-compare tbody tr:nth-child(odd) td { background: rgba(255,255,255,0.015); }
+.jx-compare .head { display: flex; flex-direction: column; gap: 6px; }
+.jx-compare .head .name { font-family: var(--font-display); font-size: 1.25rem; color: var(--ivory); }
+
+.jx-questions { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 1024px) { .jx-questions { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 680px) { .jx-questions { grid-template-columns: 1fr; } }
+.jx-q { padding: 16px; border: 1px solid var(--line); border-radius: var(--r-md); background: var(--glass); }
+.jx-q .k { font-family: var(--font-display); font-size: 1.2rem; color: var(--ivory); margin-bottom: 6px; }
+.jx-q ul { margin: 0; padding-left: 16px; font-size: 0.84rem; color: var(--ivory-2); }

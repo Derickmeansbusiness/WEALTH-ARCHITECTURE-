@@ -27,10 +27,9 @@ describe('compareScenarios', () => {
     expect(c.stressedDscr).toBeLessThan(b.stressedDscr);
   });
   it('a value shock hurts the leveraged scenario proportionally more', () => {
-    const lossA = a.lossFromShock / a.capitalRequired;
-    const lossC = c.lossFromShock / c.capitalRequired;
-    expect(lossC).toBeGreaterThan(lossA);
-    expect(a.equityAfterShock).toBeGreaterThan(0);
+    expect(c.shockHitPctOfCapital).toBeGreaterThan(a.shockHitPctOfCapital);
+    expect(c.shockHit).toBeCloseTo(a.shockHit, -2); // same asset, same absolute hit…
+    expect(a.equityAfterShock).toBeGreaterThan(0);  // …borne by less capital in C
   });
   it('shock equity equals unshocked exit equity less the shock on value', () => {
     // equity after shock = value×(1−shock) − balance ⇒ difference equals shock × exit value

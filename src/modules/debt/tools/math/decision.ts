@@ -45,6 +45,8 @@ export interface ScenarioMetrics {
   equityAtExit: number;
   equityAfterShock: number;     // equity at exit if value is shockPct lower at exit
   lossFromShock: number;        // capitalRequired − equityAfterShock (positive = loss of capital)
+  shockHit: number;             // equityAtExit − equityAfterShock (the shock's absolute hit to equity)
+  shockHitPctOfCapital: number; // shockHit ÷ capitalRequired
   balanceAtExit: number;
   balloon: number;
   ltvAtExit: number;
@@ -90,6 +92,8 @@ export function scenarioAt(i: DecisionInputs, id: ScenarioMetrics['id'], label: 
     equityAtExit: base.equityAtExit,
     equityAfterShock,
     lossFromShock: base.totalEquityIn - equityAfterShock,
+    shockHit: base.equityAtExit - equityAfterShock,
+    shockHitPctOfCapital: base.totalEquityIn > 0 ? (base.equityAtExit - equityAfterShock) / base.totalEquityIn : 0,
     balanceAtExit: last ? last.loanBalance : loan,
     balloon: base.loan.balloonBalance,
     ltvAtExit: last ? last.ltv : ltv,

@@ -1,0 +1,49 @@
+.tl-stops { display: flex; gap: 6px; flex-wrap: wrap; }
+.tl-year { font-family: var(--font-display); font-size: clamp(3rem, 6vw, 4.6rem); line-height: 1; color: var(--gold-2); font-variant-numeric: tabular-nums; }
+.tl-layout { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(300px, 0.8fr); gap: 20px; align-items: start; }
+@media (max-width: 1024px) { .tl-layout { grid-template-columns: 1fr; } }
+.tl-svg-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--r-md); background: rgba(0,0,0,0.25); }
+.tl-svg { min-width: 620px; }
+.tl-axis { stroke: var(--line-strong); stroke-width: 1; }
+.tl-axis-done { stroke: var(--gold); stroke-width: 2; }
+.tl-tick text { font-size: 10px; fill: var(--ivory-3); font-family: var(--font-mono); }
+.tl-event circle { fill: rgba(17,20,27,0.95); stroke: var(--violet); stroke-width: 1.5; }
+.tl-event.tax circle { stroke: var(--amber); }
+.tl-event text { font-size: 9.5px; fill: var(--ivory-2); }
+.tl-marker { fill: var(--gold); filter: drop-shadow(0 0 8px rgba(201,169,97,0.8)); }
+.tl-gen text { font-size: 10px; fill: var(--ivory-3); letter-spacing: 0.12em; }
+.tl-person circle { fill: rgba(17,20,27,0.95); stroke: var(--ivory-3); stroke-width: 1.2; }
+.tl-person.owner circle { stroke: var(--gold); fill: rgba(201,169,97,0.12); }
+.tl-person.active circle { stroke: var(--gold); fill: rgba(201,169,97,0.25); stroke-width: 2; }
+.tl-person.beneficiary circle { stroke: var(--violet); stroke-dasharray: 3 2; }
+.tl-person.member circle { stroke: var(--blue); }
+.tl-person.equalised circle { stroke: var(--green-2); stroke-dasharray: 3 2; }
+.tl-person.deceased circle { stroke: var(--muted); opacity: 0.4; }
+.tl-person text { font-size: 8px; fill: var(--ivory-3); font-family: var(--font-mono); }
+.tl-link { stroke: rgba(243,236,220,0.22); stroke-width: 1; }
+.tl-vehicle rect { fill: rgba(17,20,27,0.95); stroke-width: 1.4; }
+.tl-vehicle text { font-size: 10.5px; fill: var(--ivory); }
+.tl-vehicle text.sub { font-size: 8.5px; fill: var(--ivory-3); letter-spacing: 0.06em; }
+.tl-chart { width: 100%; height: auto; display: block; }
+.tl-chart text { font-size: 9.5px; fill: var(--ivory-3); font-family: var(--font-mono); }
+.tl-chart .grid { stroke: rgba(243,236,220,0.07); }
+.tl-line { fill: none; stroke-width: 1.4; opacity: 0.45; transition: opacity 0.3s, stroke-width 0.3s; }
+.tl-line.sel { opacity: 1; stroke-width: 2.4; }
+.tl-models { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+@media (max-width: 1024px) { .tl-models { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px) { .tl-models { grid-template-columns: 1fr; } }
+.tl-model { border: 1px solid var(--line); border-radius: var(--r-md); padding: 14px; background: var(--glass); cursor: pointer; text-align: left; color: inherit; font: inherit; transition: border-color 0.3s, transform 0.3s; display: flex; flex-direction: column; gap: 8px; }
+.tl-model:hover { transform: translateY(-2px); }
+.tl-model.sel { border-color: var(--gold); box-shadow: var(--shadow-gold); }
+.tl-model .big { font-family: var(--font-mono); font-size: 1.3rem; color: var(--ivory); }
+.tl-model .k { font-size: 0.66rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ivory-3); }
+.tl-gov { display: flex; gap: 12px; align-items: flex-start; }
+.tl-gov svg { flex: 0 0 40px; }
+.tl-gov ul { margin: 6px 0 0; padding-left: 16px; font-size: 0.85rem; color: var(--ivory-2); }
+.tl-lesson { border-left: 2px solid var(--red); padding: 10px 14px; background: rgba(194,90,76,0.05); border-radius: 0 var(--r-md) var(--r-md) 0; }
+.tl-lesson.good { border-color: var(--green-2); background: rgba(62,160,118,0.05); }
+.tl-events { display: flex; flex-direction: column; gap: 6px; }
+.tl-ev { display: grid; grid-template-columns: 56px 1fr auto; gap: 10px; align-items: center; padding: 8px 10px; border: 1px solid var(--line); border-radius: var(--r-sm); font-size: 0.82rem; opacity: 0.4; transition: opacity 0.4s; }
+.tl-ev.reached { opacity: 1; border-color: rgba(209,154,58,0.4); }
+.tl-assume { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+@media (max-width: 600px) { .tl-assume { grid-template-columns: 1fr; } }

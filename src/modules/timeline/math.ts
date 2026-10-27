@@ -8,9 +8,9 @@ export const MODELS: { id: Model; label: string; short: string }[] = [
 ];
 
 /** Generational transitions (deaths of G1, G2, G3) at ~30-year intervals. */
-export const TRANSITIONS = [30, 60, 90] as const;
+export const TRANSITIONS: readonly number[] = [30, 60, 90];
 export const HORIZON = 100;
-export const STOPS = [0, 25, 50, 75, 100] as const;
+export const STOPS: readonly number[] = [0, 25, 50, 75, 100];
 
 /** Number of transitions that have occurred by `year` (0..3). */
 export const transitionsBy = (year: number) => TRANSITIONS.filter((t) => year >= t).length;
@@ -119,7 +119,7 @@ export function simulate(model: Model, a: Assumptions): Simulation {
   const spend = a.spending * a.spendingMultiplier[model];
   for (let y = 1; y <= HORIZON; y++) {
     w = w * (1 + a.growth) - w * spend;
-    const tIdx = TRANSITIONS.indexOf(y as 30 | 60 | 90);
+    const tIdx = TRANSITIONS.indexOf(y);
     if (tIdx >= 0) {
       const decedents = model === 'trust' ? 1 : descendants(y - 1, a.k);
       const before = w;

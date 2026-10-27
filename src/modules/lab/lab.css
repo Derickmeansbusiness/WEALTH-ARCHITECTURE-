@@ -138,3 +138,19 @@
   .lab-name { max-width: 150px; font-size: 0.95rem; }
   .lab-question .display { font-size: 0.95rem; }
 }
+
+/* ── Debt Studio · Financing Map (reuses the lab engine) ────────────────── */
+.fm-canvas { border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden; background: var(--bg-0); }
+.fm-canvas .sc-frame { border-radius: var(--r-lg); }
+.fm-canvas .lab-question { bottom: 12px; left: 12px; }
+.fm-kv { padding: 8px 10px; border: 1px solid var(--line); border-radius: var(--r-sm); background: var(--glass); }
+.fm-kv .k { font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ivory-3); margin-bottom: 2px; }
+.fm-kv .v { font-size: 0.86rem; color: var(--ivory); }
+.fm-paid td { color: var(--ivory-3); }
+.fm-paid td:first-child::after { content: ' ✓'; color: var(--green-2); }
+.fm-sheet-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.fm-line { display: flex; justify-content: space-between; gap: 8px; font-size: 0.8rem; padding: 4px 0; border-bottom: 1px dashed var(--line); color: var(--ivory-2); }
+.fm-line.hi { color: var(--green-2); }
+.fm-line.hi.red { color: #e7a398; }
+.fm-line.total { border-bottom: 0; border-top: 1px solid var(--line-strong); font-weight: 500; color: var(--ivory); margin-top: 2px; }
+@media (max-width: 680px) { .fm-sheet-cols { grid-template-columns: 1fr; } .fm-tables { grid-template-columns: 1fr; } }

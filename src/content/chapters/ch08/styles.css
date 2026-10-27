@@ -1,0 +1,13 @@
+/* Chapter 08 — Family Capital Waterfall */
+.ch08-diagram-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.ch08-diagram-wrap svg { min-width: 620px; }
+.ch08-caption { font-size: 0.82rem; color: var(--ivory-3); margin-top: 10px; line-height: 1.55; }
+.ch08-bars { display: grid; gap: 8px; }
+.ch08-bar { display: grid; grid-template-columns: 140px 1fr 110px; gap: 10px; align-items: center; font-size: 0.84rem; }
+.ch08-bar .k { color: var(--ivory-2); }
+.ch08-bar .v { font-family: var(--font-mono); text-align: right; color: var(--ivory); }
+.ch08-bar .track { height: 10px; background: rgba(255,255,255,0.05); border-radius: 999px; overflow: hidden; }
+.ch08-bar .fill { height: 100%; border-radius: 999px; transition: width 0.6s var(--ease); }
+@media (max-width: 560px) { .ch08-bar { grid-template-columns: 1fr 90px; } .ch08-bar .track { grid-column: 1 / -1; } }
+.ch08-alloc-sum { font-family: var(--font-mono); font-size: 0.8rem; }
+.ch08-alloc-sum.bad { color: var(--amber); }

@@ -1,0 +1,26 @@
+/* Chapter 13 — Wealth Transfer */
+.ch13-diagram-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.ch13-diagram-wrap svg { min-width: 680px; }
+.ch13-caption { font-size: 0.85rem; color: var(--ivory-3); margin-top: 10px; line-height: 1.55; }
+.ch13-legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 0.74rem; color: var(--ivory-3); margin-top: 8px; }
+.ch13-legend span::before { content: ''; display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: -1px; }
+.ch13-legend .heir::before { background: var(--ivory-2); }
+.ch13-legend .probate::before { background: var(--red); }
+.ch13-legend .trust::before { background: var(--violet); }
+.ch13-legend .gov::before { background: var(--blue); }
+
+.ch13-paths { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 900px) { .ch13-paths { grid-template-columns: 1fr; } }
+.ch13-path { border: 1px solid var(--line); border-radius: var(--r-md); padding: 14px 16px; background: var(--glass); cursor: pointer; transition: border-color 0.2s, box-shadow 0.2s; display: flex; flex-direction: column; gap: 8px; }
+.ch13-path:hover { border-color: var(--line-strong); }
+.ch13-path.sel { border-color: rgba(201,169,97,0.5); box-shadow: var(--shadow-gold); }
+.ch13-path h5 { margin: 0; font-family: var(--font-display); font-size: 1.25rem; color: var(--ivory); font-weight: 500; }
+.ch13-path .big { font-family: var(--font-mono); font-size: 1.3rem; color: var(--gold-2); }
+.ch13-path .k { font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ivory-3); }
+.ch13-path .v { font-family: var(--font-mono); font-size: 0.9rem; color: var(--ivory); }
+.ch13-kv { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; align-items: baseline; }
+.ch13-frag { display: flex; flex-wrap: wrap; gap: 3px; max-width: 220px; }
+.ch13-frag i { width: 7px; height: 7px; border-radius: 2px; background: var(--ivory-3); opacity: 0.8; }
+.ch13-frag i.one { width: 24px; height: 24px; border-radius: 6px; background: var(--violet); }
+.ch13-frag i.biz { width: 24px; height: 24px; border-radius: 6px; background: var(--gold); }
+.ch13-basis { font-size: 0.78rem; color: var(--ivory-2); border-left: 2px solid var(--amber); padding-left: 10px; line-height: 1.45; }

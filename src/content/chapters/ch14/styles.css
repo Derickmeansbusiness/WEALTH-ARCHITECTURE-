@@ -1,0 +1,25 @@
+/* Chapter 14 — Family Governance */
+.ch14-diagram-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.ch14-diagram-wrap svg { min-width: 680px; }
+.ch14-caption { font-size: 0.85rem; color: var(--ivory-3); margin-top: 10px; line-height: 1.55; }
+.ch14-legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 0.74rem; color: var(--ivory-3); margin-top: 8px; }
+.ch14-legend span::before { content: ''; display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: -1px; }
+.ch14-legend .own::before { background: var(--gold); }
+.ch14-legend .ctrl::before { background: var(--blue); }
+.ch14-legend .ben::before { background: var(--violet); }
+.ch14-legend .info::before { background: var(--green-2); }
+
+.ch14-q { border: 1px solid var(--line); border-radius: var(--r-md); padding: 12px 14px; background: var(--glass); display: flex; flex-direction: column; gap: 8px; }
+.ch14-q .t { font-size: 0.9rem; color: var(--ivory); line-height: 1.45; }
+.ch14-q .c { font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ivory-3); }
+.ch14-ans { display: inline-flex; border: 1px solid var(--line-strong); border-radius: 999px; overflow: hidden; align-self: flex-start; }
+.ch14-ans button { background: transparent; border: 0; color: var(--ivory-2); padding: 6px 12px; font-size: 0.76rem; letter-spacing: 0.04em; }
+.ch14-ans button.yes.on { background: rgba(62,160,118,0.18); color: var(--green-2); }
+.ch14-ans button.partial.on { background: rgba(209,154,58,0.18); color: var(--amber); }
+.ch14-ans button.no.on { background: rgba(194,90,76,0.18); color: #e7a398; }
+
+.ch14-radar { width: 100%; max-width: 420px; margin: 0 auto; display: block; }
+.ch14-gap { border-left: 2px solid var(--amber); padding: 10px 14px; background: var(--glass); border-radius: 0 var(--r-md) var(--r-md) 0; }
+.ch14-gap.hot { border-color: var(--red); }
+.ch14-gap h5 { margin: 0 0 4px; font-size: 0.95rem; color: var(--ivory); font-weight: 500; }
+.ch14-gap p { margin: 0; font-size: 0.82rem; color: var(--ivory-2); line-height: 1.5; }

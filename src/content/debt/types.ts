@@ -5,7 +5,7 @@
 import type { ComponentType } from 'react';
 import type { Objective, Term, KnowledgeQuestion, Misconception, Reference, Confidence } from '@/types/content';
 import type { JurisdictionMode } from '@/store/useAppStore';
-import type { LoanStructure } from '@/lib/finance';
+import type { LoanStructure, LeverageInput } from '@/lib/finance';
 
 export type DebtJurisdiction = JurisdictionMode;
 
@@ -116,6 +116,8 @@ export interface DebtCase {
   objectives: Objective[];
   stages: CaseStage[];
   takeaways: string[];
+  /** Case C: side-by-side scenarios run through analyzeLeverage */
+  compare?: { label: string; input: LeverageInput }[];
   relatedLessons: number[];
   relatedTools: { to: string; label: string }[];
 }

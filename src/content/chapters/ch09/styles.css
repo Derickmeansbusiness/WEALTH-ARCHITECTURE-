@@ -1,0 +1,18 @@
+/* Chapter 09 — Real Estate Tax Architecture */
+.ch09-diagram-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.ch09-diagram-wrap svg { min-width: 640px; }
+.ch09-caption { font-size: 0.82rem; color: var(--ivory-3); margin-top: 10px; line-height: 1.55; }
+.ch09-legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 0.74rem; color: var(--ivory-3); margin-bottom: 8px; }
+.ch09-legend span::before { content: ''; display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: -1px; background: var(--c); }
+.ch09-twocol { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 720px) { .ch09-twocol { grid-template-columns: 1fr; } }
+.ch09-col { border: 1px solid var(--line); border-radius: var(--r-md); background: var(--glass); padding: 14px 16px; }
+.ch09-col h4 { margin: 0 0 8px; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; font-family: var(--font-body); font-weight: 500; color: var(--ivory-3); }
+.ch09-col .line { display: flex; justify-content: space-between; gap: 12px; font-size: 0.86rem; padding: 5px 0; border-bottom: 1px dashed var(--line); }
+.ch09-col .line:last-child { border-bottom: 0; }
+.ch09-col .line .v { font-family: var(--font-mono); color: var(--ivory); }
+.ch09-col .line.total { font-weight: 600; border-top: 1px solid var(--line-strong); margin-top: 4px; padding-top: 8px; }
+.ch09-col .line.green .v { color: var(--green-2); }
+.ch09-col .line.red .v { color: #e7a398; }
+.ch09-col .line.gold .v { color: var(--gold-2); }
+.ch09-col .line.violet .v { color: #b7adda; }

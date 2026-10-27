@@ -24,7 +24,10 @@ describe('mapReporting — tax character', () => {
     const r = mapReporting(f);
     expect(r.items.length).toBe(0);
     expect(r.complexity).toBe(1);
-    expect(r.annualCost[0]).toBe(SITUS.cook.trusteeFee[0]);
+    // trustee fee plus foreign-company maintenance only; no U.S. compliance band
+    expect(r.annualCost[0]).toBe(SITUS.cook.trusteeFee[0] + 1500);
+    const noCo = mapReporting({ ...f, foreignCompany: false });
+    expect(noCo.annualCost[0]).toBe(SITUS.cook.trusteeFee[0]);
   });
 });
 

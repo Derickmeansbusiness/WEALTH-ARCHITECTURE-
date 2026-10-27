@@ -1,16 +1,129 @@
 import type { ChapterModule } from '@/types/content';
 import { CHAPTERS } from '../manifest';
-import { EmptyState } from '@/components/ui';
+import Diagram from './Diagram';
+import Simulator from './Simulator';
 
 const meta = CHAPTERS.find((c) => c.id === 'ch13')!;
 
 const mod: ChapterModule = {
   content: {
-    id: meta.id, number: meta.number, slug: meta.slug, title: meta.title, subtitle: 'Content in production', objectives: ['governance'], duration: meta.duration,
-    hook: '', concept: [], realWorldExample: { title: '', body: [] }, misconception: { claim: '', reality: '', confidence: 'amber' }, professionalExplanation: [],
-    knowledgeCheck: [], caseStudy: { title: '', family: '', situation: '', structure: '', outcome: '', lesson: '' }, terminology: [], references: [], takeaways: [],
+    id: meta.id,
+    number: meta.number,
+    slug: meta.slug,
+    title: meta.title,
+    subtitle: 'Gifts, bequests, basis and the instruments that move value between generations without breaking the architecture.',
+    objectives: ['estate-planning', 'tax-planning', 'succession'],
+    duration: meta.duration,
+    hook: 'Every transfer is three decisions wearing one coat: who gets it, when, and what the tax authority is told it was worth.',
+    concept: [
+      'The transfer system in the United States is a unified one: **gifts during life and bequests at death draw on the same lifetime exemption** and face the same top rate, currently a flat 40% above the exemption. On top of that sits the **annual exclusion** under IRC §2503(b), an indexed per-donee amount (in the high teens of thousands of dollars in recent years) that can be given to any number of people each year without touching the exemption, doubled for a married couple who elect to split gifts. Direct payments of tuition and medical expenses under §2503(e) are excluded without limit. These are the plumbing. Families who use them every year for thirty years move a surprising amount of wealth with no paperwork more complicated than a Form 709.',
+      'The **basic exclusion amount** is where the politics live. It was $675,000 in 2001, roughly $5 million indexed after 2010, doubled by the 2017 Act to about $10 million indexed, scheduled to fall back by half after 2025, and then reset by 2025 legislation to **$15 million per person for 2026, indexed thereafter**. Treat any specific figure in this chapter as a snapshot: the number is indexed each year and Congress has changed the formula five times in twenty-five years. **Portability** under §2010(c)(4) lets a surviving spouse add the deceased spouse\'s unused exclusion to her own, but only if a Form 706 is filed for the first death, even where no tax is due. Skipping that return because "the estate was too small" is one of the most expensive omissions in the field, and the IRS\'s simplified late-election relief (Rev. Proc. 2022-32) exists because so many families made it.',
+      'The **generation-skipping transfer tax** under Chapter 13 of the Code is the reason dynasty trusts need a specialist. It imposes a second flat tax on transfers that skip a generation, so that a grandparent cannot avoid a layer of estate tax by passing wealth directly to grandchildren. Each person has a GST exemption equal to the basic exclusion amount (§2631(c)). Allocate it to a trust at funding and the trust is **GST-exempt forever**, regardless of how large it grows, in a state whose rule against perpetuities has been abolished or extended (South Dakota, Delaware, Nevada, Alaska among others). Fail to allocate it, or allocate it late when the assets have appreciated, and every distribution to a grandchild carries a 40% toll. The allocation is made on a gift tax return; it is a line on a form, and it is the most valuable line a family will ever file.',
+      'Now the tradeoff everyone gets wrong. Property inherited at death takes a **basis stepped up to fair market value** under §1014; a lifetime gift carries the donor\'s basis over under §1015. Give a child stock bought for $1 million and now worth $10 million, and the child inherits $9 million of unrealized gain. Leave it at death and the gain disappears. So **gift high-basis or fast-growing assets, bequeath low-basis assets**, and for assets in an irrevocable grantor trust, which Rev. Rul. 2023-2 confirms get no step-up because they are not in the estate, use the grantor\'s **swap power** to pull low-basis assets back into the estate before death in exchange for cash or high-basis assets. The arithmetic is simple: a 40% transfer tax saved on growth versus a 20–30% capital gains tax owed on all gain. The planning discipline is remembering that both numbers exist.',
+      'Valuation is where the instruments earn their fees. Interests in a family limited partnership or LLC are worth less than their pro-rata share of the underlying assets because a buyer would pay less for an interest it cannot control (**minority discount**) or sell (**lack-of-marketability discount**). Combined discounts in the 20–40% range are routinely sustained with a qualified appraisal. The IRS has fought this for decades: §2704 disregards certain lapsing rights and liquidation restrictions, Treasury proposed sweeping regulations in 2016 that would have gutted most discounts and withdrew them in 2017, and cases like *Estate of Powell* (2017) pulled FLP assets back into the estate under §2036 where the decedent kept too much control and the partnership was formed too close to death. Discounts work when the entity has a genuine business purpose, the formalities are respected, and the senior generation actually gives up what it says it gave up.',
+      'The core **freeze techniques** all do the same thing: move future appreciation out of the estate while the transferor keeps a fixed return. A **GRAT** under §2702 returns the grantor an annuity whose present value at the §7520 rate nearly equals the contribution (*Walton v. Commissioner* allows "zeroing out"), so only growth above that hurdle passes to the remainder beneficiaries gift-tax free; the risks are the grantor dying during the term and GST exemption being unallocable until the term ends. An **installment sale to an intentionally defective grantor trust** sells assets to a trust the grantor is taxed on but does not own for estate purposes, in exchange for a note at the applicable federal rate; because grantor and trust are the same taxpayer (Rev. Rul. 85-13), no gain is recognized, and the grantor\'s payment of the trust\'s income tax is not a gift (Rev. Rul. 2004-64). The trust needs seed capital, commonly around 10% of the purchase price, and the note must be real: payments made, interest at the AFR, a default remedy. A **SLAT** names the spouse as beneficiary so the family keeps indirect access; the reciprocal trust doctrine (*Estate of Grace*) punishes mirror-image SLATs, and divorce turns the design inside out. **Charitable lead and remainder trusts** under §§170, 664, 2055 and 2522 split value between charity and family in either order, with a deduction for the charitable slice and the family slice passing at a discount.',
+      'Then the operating business, which is almost never a candidate for equal division. **Business succession** means deciding who will run the company and who will own it, which are different questions, and then building the transfer around that: voting and non-voting recapitalization so control goes to the successor while value is shared, a **buy-sell agreement** that fixes how and at what price departing or deceased owners are bought out (and satisfies §2703 so the price is respected for estate tax: bona fide business arrangement, not a device to pass wealth cheaply, and comparable to arm\'s-length terms), and funding for that buyout, often life insurance. **Direct inheritance** of an operating company by three children with three temperaments is the most common way a family business dies in the second generation. The siblings who do not run it should be bought out or should hold non-voting economic interests with a clear distribution policy, not a seat at the operating table.',
+      'Finally, the mechanics of the handover. **Probate** is a public, court-supervised, state-by-state process that in a multi-state estate means multiple proceedings, and it is slow: a year is quick. A funded **revocable living trust** avoids it entirely; the successor trustee simply continues. The same trust handles **incapacity**, which is statistically more likely than sudden death and far less planned for: a successor trustee steps in, a **durable power of attorney** covers assets outside the trust, a health care directive and HIPAA release cover the rest. I have sat with families where the founder was alive, incapacitated, and nobody could sign anything for eight months. The estate plan was excellent. The incapacity plan did not exist.',
+    ],
+    realWorldExample: {
+      title: 'Gift now or leave later: one $12 million block of stock',
+      body: [
+        'A 68-year-old founder holds $12 million of company stock with a $1.5 million basis, expected to grow at 7%. She has used none of her exemption. Her son, 40, is in the top brackets. Compare two paths over the 20 years until her expected death, using an illustrative 40% transfer-tax rate above the exemption and a 23.8% combined federal capital-gains rate; ignore state tax for simplicity.',
+        'Bequest. The stock grows to about $46.4 million. With a $15 million exemption (indexed, but hold it constant for the illustration), the taxable estate on this block is roughly $31.4 million and the estate tax about $12.6 million. The son inherits with basis stepped up to $46.4 million; if he sells, no capital gain. Net to the son: about $33.8 million.',
+        'Gift today into a GST-exempt grantor trust. The $12 million gift uses $12 million of exemption and no tax is paid. The trust grows to $46.4 million, outside her estate; estate tax on it is zero. The trust carries over her $1.5 million basis, so a sale would trigger roughly $10.7 million of capital gains tax, leaving about $35.7 million, already better than the bequest. And she has two further levers: she pays the trust\'s income tax each year (a tax-free transfer in substance), and before death she can swap cash into the trust for the low-basis stock, bringing it back into her estate for a step-up while the trust keeps the value. Execute the swap and the family nets close to the full $46.4 million less estate tax only on what she swapped in, a result neither pure path achieves alone.',
+        'The lesson is not that gifting wins; it is that the gift-versus-bequest decision is a basis decision as much as a transfer-tax decision, and that grantor-trust powers let a family revisit it as late as the last year of life.',
+      ],
+    },
+    misconception: {
+      claim: 'Giving assets away during life is always better than leaving them at death because it removes them from the taxable estate.',
+      reality: 'Lifetime gifts remove future growth from the estate but forfeit the §1014 basis step-up: the recipient inherits the donor\'s basis and all unrealized gain. For low-basis assets the capital gains cost can exceed the transfer tax saved, especially for estates under the exemption. The right answer depends on basis, growth, expected life, and whether grantor-trust swap powers are available.',
+      confidence: 'amber',
+    },
+    professionalExplanation: [
+      'A transfer plan starts from a **balance sheet annotated with basis and growth expectations**, because the instrument follows the asset. Low-basis, slow-growth assets (the founder\'s original real estate) want to stay in the estate for the step-up. High-growth assets (pre-liquidity company stock, a development parcel) want to be moved early at today\'s value. Cash-flowing assets suit installment sales because the income services the note. Marketable securities suit GRATs because they can be re-GRATed in short rolling terms. Nothing illiquid with uncertain value should go into a GRAT, where a valuation adjustment on audit simply increases the annuity rather than causing a gift, but where the trust has to actually pay that annuity in kind.',
+      'The **tax questions** are layered. Gift tax: adequate disclosure on Form 709 under Treas. Reg. §301.6501(c)-1(f) starts the three-year statute running; without it the IRS can revalue the gift at death. GST: allocation of exemption, the automatic allocation rules of §2632(c), and the ETIP rule that blocks allocation to a GRAT during its term. Income tax: grantor trust status under §§671–677, the swap power under §675(4)(C) (Rev. Rul. 2008-22 confirms it does not cause estate inclusion), the note interest under §7872 and §1274, and the end of grantor status at death, which converts an IDGT note into a potentially taxable transaction. Estate tax: §2036 retained-interest inclusion when the transferor keeps too much control or implied benefit, the §2035 three-year rule for certain released powers and life insurance, and §2703 for buy-sell pricing. State estate and inheritance taxes in roughly a third of the states, with exemptions far lower than the federal figure, change the arithmetic for residents of those states.',
+      'When are **professionals required**? Annual-exclusion gifts and a funded revocable trust with a durable power of attorney are standard estate planning any competent trusts-and-estates attorney handles. Anything that uses lifetime exemption, allocates GST exemption, relies on a valuation discount, involves an operating business, or crosses state or national borders requires a specialist estate planning attorney, a tax adviser who will prepare the Form 709 with adequate disclosure, and a qualified appraiser whose report meets the regulatory standard. Trustee selection matters as much as drafting: a dynasty trust is a hundred-year institution and the first trustee will not be there for most of it.',
+      'A closing observation. The techniques in this chapter are well settled, and the IRS knows exactly how they work. The plans that fail on audit are not failing on law; they fail on execution: annuity payments made late, notes without interest actually paid, appraisals written by the family accountant, partnership formalities abandoned the week after formation. The best transfer plan is the one that is still being administered correctly in year twelve.',
+    ],
+    knowledgeCheck: [
+      {
+        id: 'ch13-q1',
+        prompt: 'A parent gives a child stock with a basis of $200,000 and a value of $2 million. The child\'s basis is:',
+        options: ['$2 million, stepped up to fair market value under §1014', '$200,000, carried over from the parent under §1015', 'Zero, because gifts have no basis', '$1 million, the midpoint'],
+        answer: 1,
+        explanation: 'Lifetime gifts carry over the donor\'s basis under §1015 (increased by any gift tax paid on appreciation). Only property acquired from a decedent receives the §1014 step-up.',
+      },
+      {
+        id: 'ch13-q2',
+        prompt: 'Why must a surviving spouse file a Form 706 estate tax return for the first spouse to die even when no tax is owed?',
+        options: ['It is required for all deaths regardless of estate size', 'To elect portability of the deceased spouse\'s unused exclusion amount under §2010(c)', 'To claim the annual exclusion', 'To allocate GST exemption to the surviving spouse'],
+        answer: 1,
+        explanation: 'Portability is elective and the election is made only on a timely (or late under Rev. Proc. 2022-32) Form 706. Without it the deceased spouse\'s unused exclusion is lost.',
+      },
+      {
+        id: 'ch13-q3',
+        prompt: 'In a zeroed-out GRAT, what passes to the remainder beneficiaries free of gift tax?',
+        options: ['The entire contributed value', 'Nothing; GRATs are taxable gifts', 'Appreciation in excess of the §7520 hurdle rate after the annuity is paid back', 'The annuity payments'],
+        answer: 2,
+        explanation: 'Walton v. Commissioner permits an annuity whose present value nearly equals the contribution, so the taxable gift is near zero. Growth above the §7520 rate passes to the remainder, provided the grantor survives the term.',
+      },
+      {
+        id: 'ch13-q4',
+        prompt: 'Which fact pattern most invites the IRS to disregard valuation discounts and pull FLP assets back into the estate under §2036?',
+        options: ['A partnership formed years earlier with active management, formalities observed and the senior generation holding a minority interest', 'A partnership formed weeks before death holding only marketable securities, with the decedent retaining control and using partnership funds for personal expenses', 'A partnership with an independent qualified appraisal', 'A partnership that files annual Form 1065 returns'],
+        answer: 1,
+        explanation: 'Estate of Powell and similar cases turn on deathbed formation, retained control, lack of business purpose and personal use of entity assets. Discounts survive when the entity is real and the transferor truly parted with control.',
+      },
+      {
+        id: 'ch13-q5',
+        prompt: 'What is the primary advantage of a funded revocable living trust over a will for the handover itself?',
+        options: ['It eliminates estate tax', 'It avoids probate and provides for incapacity through a successor trustee without court involvement', 'It provides asset protection from the grantor\'s creditors', 'It changes the basis of the assets'],
+        answer: 1,
+        explanation: 'A revocable trust is tax-neutral and offers no creditor protection during the grantor\'s life. Its value is administrative: continuity at incapacity and death, privacy, and avoidance of (possibly multi-state) probate.',
+      },
+    ],
+    caseStudy: {
+      title: 'The Haddad Family: three children, one company, two ways to lose it',
+      family: 'Nabil Haddad (71), founder of a $60 million food-distribution business; children Layla (44, COO), Karim (41, a physician) and Rania (37, a teacher). Nabil\'s wife died in 2019; a Form 706 was never filed.',
+      situation: 'Nabil\'s will left the company equally to his three children. His basis in the stock was about $2 million. He had made no lifetime gifts beyond annual exclusions and had allocated no GST exemption to anything. A $15 million life insurance policy was owned by him personally. He had no durable power of attorney; his revocable trust was signed but never funded. He suffered a stroke at 70 and was incapacitated for five months before partially recovering.',
+      structure: 'Reworked over 18 months: (1) a recapitalization into 1% voting and 99% non-voting shares; (2) a sale of 60% of the non-voting shares to an intentionally defective grantor trust for the benefit of all three children and their descendants, in exchange for a nine-year note at the AFR, after a seed gift of about $4 million using exemption, with a qualified appraisal supporting a 30% combined discount; (3) GST exemption allocated to the trust at funding; (4) a buy-sell agreement under which Layla acquires the voting shares and the trust\'s distribution policy pays Karim\'s and Rania\'s branches from company dividends, with a put right funded by (5) the life insurance, moved into an irrevocable life insurance trust (accepting the §2035 three-year risk); (6) a late portability election under Rev. Proc. 2022-32 recovering his late wife\'s unused exclusion; (7) a funded revocable trust and durable powers of attorney.',
+      outcome: 'The sale removed roughly $25 million of discounted value, and all its future growth, from Nabil\'s estate at a gift-tax cost of zero beyond the seed gift. Note payments are serviced by company dividends, and Nabil pays the trust\'s income tax each year, moving further value without gift tax. The company has one operator and no sibling board fights; Karim and Rania receive predictable distributions and have a liquidity path. The recovered portability roughly doubled the exemption available at Nabil\'s death. The remaining risk, which the family accepted knowingly, is the carryover basis on shares inside the trust; the swap power is documented and the plan calls for swapping cash for low-basis shares in Nabil\'s final years if circumstances allow.',
+      lesson: 'The original plan would have delivered a company to three equal owners with three different needs, a $15 million policy into a taxable estate, and an incapacity with no one authorized to act. The reworked plan separates control from value, pays non-operating heirs through policy rather than ownership, and treats the basis tradeoff as a decision to be revisited rather than a cost to be ignored.',
+    },
+    terminology: [
+      { term: 'Annual exclusion', definition: 'The indexed amount under IRC §2503(b) that may be given to each donee each year without using lifetime exemption or filing requirements (gift-splitting doubles it for married couples).' },
+      { term: 'Basic exclusion amount (lifetime exemption)', definition: 'The indexed amount under §2010(c) that may pass free of gift and estate tax over a lifetime and at death; set at $15 million for 2026 by 2025 legislation and indexed thereafter.' },
+      { term: 'Portability (DSUE)', definition: 'The deceased spousal unused exclusion amount a surviving spouse may add to her own exclusion, elected on a timely filed Form 706.' },
+      { term: 'Generation-skipping transfer (GST) tax', definition: 'A flat tax under IRC Chapter 13 on transfers to skip persons (grandchildren and beyond, or trusts for them), offset by a GST exemption equal to the basic exclusion amount.' },
+      { term: 'Step-up in basis', definition: 'Under §1014, property acquired from a decedent takes a basis equal to fair market value at death, eliminating unrealized gain.' },
+      { term: 'Carryover basis', definition: 'Under §1015, a donee takes the donor\'s adjusted basis in gifted property, inheriting the unrealized gain.' },
+      { term: 'GRAT', definition: 'Grantor retained annuity trust under §2702: the grantor receives a fixed annuity for a term; appreciation above the §7520 rate passes to remainder beneficiaries at little or no gift-tax cost.' },
+      { term: 'IDGT / installment sale', definition: 'Intentionally defective grantor trust: a trust the grantor is taxed on for income tax but that is outside the estate; assets are sold to it for a note, with no gain recognized under Rev. Rul. 85-13.' },
+      { term: 'SLAT', definition: 'Spousal lifetime access trust: an irrevocable trust for the benefit of the grantor\'s spouse (and descendants), preserving indirect family access while removing assets from both estates.' },
+      { term: 'Valuation discount', definition: 'Reduction in the appraised value of an entity interest for lack of control (minority) and lack of marketability, subject to §2704 and §2036 scrutiny.' },
+      { term: 'Buy-sell agreement', definition: 'A contract among owners fixing how and at what price interests are transferred on death, disability or departure; price is respected for estate tax only if §2703 is satisfied.' },
+      { term: 'Durable power of attorney', definition: 'An instrument authorizing an agent to act on the principal\'s financial affairs that remains effective during incapacity.' },
+    ],
+    references: [
+      { title: 'Internal Revenue Code — unified credit against estate tax; portability', citation: '26 U.S.C. § 2010(c)', jurisdiction: 'United States', type: 'statute', note: 'Basic exclusion amount and deceased spousal unused exclusion. Amount indexed and reset by legislation; confirm current figure.' },
+      { title: 'Internal Revenue Code — basis of property acquired from a decedent; basis of property acquired by gift', citation: '26 U.S.C. §§ 1014, 1015', jurisdiction: 'United States', type: 'statute' },
+      { title: 'Rev. Rul. 2023-2', citation: '2023-16 I.R.B. 658', jurisdiction: 'United States', type: 'guidance', note: 'No §1014 basis adjustment for assets held in an irrevocable grantor trust not included in the grantor\'s gross estate.' },
+      { title: 'Walton v. Commissioner', citation: '115 T.C. 589 (2000)', jurisdiction: 'United States (Tax Court)', type: 'case', note: 'Permits "zeroed-out" GRATs under §2702.' },
+      { title: 'Rev. Rul. 85-13 and Rev. Rul. 2004-64', citation: '1985-1 C.B. 184; 2004-27 I.R.B. 7', jurisdiction: 'United States', type: 'guidance', note: 'Transactions between grantor and grantor trust disregarded; grantor\'s payment of trust income tax is not a gift.' },
+      { title: 'Estate of Powell v. Commissioner', citation: '148 T.C. 392 (2017)', jurisdiction: 'United States (Tax Court)', type: 'case', note: 'FLP assets included in estate under §2036(a)(2) where decedent retained control; deathbed formation.' },
+      { title: 'Rev. Proc. 2022-32', citation: '2022-30 I.R.B. 101', jurisdiction: 'United States', type: 'guidance', note: 'Simplified method for late portability elections up to five years after death.' },
+      { title: 'Internal Revenue Code — special valuation rules; certain rights and restrictions disregarded', citation: '26 U.S.C. §§ 2703, 2704', jurisdiction: 'United States', type: 'statute', note: 'Buy-sell agreement requirements and limits on valuation discounts; 2016 proposed §2704 regulations were withdrawn in 2017.' },
+    ],
+    takeaways: [
+      'Gifts and bequests share one lifetime exemption and one rate; the annual exclusion and direct tuition/medical payments are the frictionless layer families should use every year.',
+      'Exemption amounts are indexed and have been reset by legislation repeatedly ($15 million for 2026 under 2025 legislation); file Form 706 at the first spouse\'s death to preserve portability regardless of estate size.',
+      'The gift-versus-bequest decision is a basis decision: lifetime gifts forfeit the §1014 step-up, so gift high-growth or high-basis assets and use grantor-trust swap powers to recover basis on the rest.',
+      'GRATs, installment sales to grantor trusts, SLATs and charitable split-interest trusts all freeze value and move growth; they fail on execution (late annuities, unpaid notes, weak appraisals) far more often than on law.',
+      'Operating businesses should pass by succession design (control to the operator, value shared through non-voting interests and buy-sell funding), not by equal direct inheritance; and every plan needs an incapacity layer, not just a death layer.',
+    ],
   },
-  Diagram: () => <EmptyState title="Diagram in production" />,
-  Simulator: () => <EmptyState title="Simulator in production" />,
+  Diagram,
+  Simulator,
 };
+
 export default mod;

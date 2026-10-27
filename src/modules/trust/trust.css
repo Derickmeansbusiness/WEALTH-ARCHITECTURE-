@@ -1,0 +1,80 @@
+/* Trust Explorer */
+.tx-layout { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(300px, 1fr); gap: 16px; align-items: start; }
+.tx-stage-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.tx-stage { min-width: 720px; width: 100%; height: auto; display: block; }
+
+.tx-toggles { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+.tx-toggle { padding: 10px 12px; border: 1px solid var(--line); border-radius: var(--r-md); background: var(--glass); }
+.tx-toggle .l { font-size: 0.64rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ivory-3); margin-bottom: 6px; }
+.tx-toggle .seg { display: flex; border: 1px solid var(--line-strong); border-radius: 999px; overflow: hidden; }
+.tx-toggle .seg button { flex: 1; border: 0; background: transparent; color: var(--ivory-3); font-size: 0.74rem; padding: 7px 6px; letter-spacing: 0.04em; transition: all 0.25s var(--ease); }
+.tx-toggle .seg button.on { background: rgba(201, 169, 97, 0.18); color: var(--gold-2); }
+.tx-toggle .seg button:disabled { opacity: 0.4; cursor: not-allowed; }
+.tx-toggle .note { font-size: 0.66rem; color: var(--muted); margin-top: 6px; }
+
+/* diagram */
+.tx-stage .tx-node rect { fill: rgba(17, 20, 27, 0.92); stroke: var(--line-strong); stroke-width: 1.2; }
+.tx-stage .tx-node.gold rect { stroke: var(--gold); }
+.tx-stage .tx-node.violet rect { stroke: var(--violet); }
+.tx-stage .tx-node.blue rect { stroke: var(--blue); }
+.tx-stage .tx-node.green rect { stroke: var(--green-2); }
+.tx-stage .tx-node.red rect { stroke: var(--red); }
+.tx-stage .tx-node .t { font-size: 13px; fill: var(--ivory); font-weight: 500; }
+.tx-stage .tx-node .s { font-size: 9px; fill: var(--ivory-3); letter-spacing: 0.1em; text-transform: uppercase; }
+.tx-stage .tx-node.clickable { cursor: pointer; }
+.tx-stage .tx-trust { transition: transform 0.9s var(--ease); }
+.tx-stage .tx-trust rect.body { fill: rgba(124, 108, 168, 0.08); stroke: var(--violet); stroke-width: 1.4; }
+.tx-stage .tx-trust .title { font-family: var(--font-display); font-size: 22px; fill: var(--ivory); }
+.tx-stage .tx-asset rect { fill: rgba(201, 169, 97, 0.1); stroke: rgba(201, 169, 97, 0.5); }
+.tx-stage .tx-asset text { font-size: 10px; fill: var(--gold-2); }
+.tx-stage .tx-edge { fill: none; stroke-width: 1.5; }
+.tx-stage .tx-edge.gold { stroke: var(--gold); }
+.tx-stage .tx-edge.blue { stroke: var(--blue); }
+.tx-stage .tx-edge.violet { stroke: var(--violet); }
+.tx-stage .tx-edge.green { stroke: var(--green-2); }
+.tx-stage .tx-edge.red { stroke: var(--red); }
+.tx-stage .tx-edge.amber { stroke: var(--amber); }
+.tx-stage .tx-edge.dashed { stroke-dasharray: 5 6; }
+.tx-stage .tx-edge.faint { opacity: 0.25; animation: none; }
+.tx-stage .tx-lbl { font-size: 10px; fill: var(--ivory-2); paint-order: stroke; stroke: rgba(6, 7, 10, 0.85); stroke-width: 3px; }
+.tx-stage .tx-lbl.red { fill: #e7a398; }
+.tx-stage .tx-lbl.green { fill: var(--green-2); }
+.tx-stage .tx-lbl.amber { fill: var(--amber); }
+.tx-stage .tx-arrow { fill: var(--ivory-3); }
+.tx-stage .tx-border { stroke: var(--amber); stroke-width: 1.2; stroke-dasharray: 8 6; opacity: 0; transition: opacity 0.8s var(--ease); }
+.tx-stage .tx-border.on { opacity: 0.8; }
+.tx-stage .tx-foreign-zone { fill: rgba(209, 154, 58, 0.04); opacity: 0; transition: opacity 0.8s var(--ease); }
+.tx-stage .tx-foreign-zone.on { opacity: 1; }
+.tx-stage .tx-valve rect { fill: rgba(17, 20, 27, 1); stroke: var(--amber); }
+.tx-stage .tx-valve text { font-size: 8.5px; fill: var(--amber); letter-spacing: 0.08em; text-transform: uppercase; }
+@keyframes tx-cut { 0% { transform: scale(0) rotate(0deg); opacity: 0; } 60% { transform: scale(1.3) rotate(10deg); opacity: 1; } 100% { transform: scale(1) rotate(0deg); opacity: 1; } }
+.tx-stage .tx-cut { transform-box: fill-box; transform-origin: center; animation: tx-cut 0.7s var(--ease) both; }
+.tx-stage .tx-cut line { stroke: var(--red); stroke-width: 2.4; stroke-linecap: round; }
+@keyframes tx-sever { to { stroke-dashoffset: 0; opacity: 0.15; } }
+.tx-stage .tx-edge.severed { stroke-dasharray: 4 6; animation: tx-sever 0.9s var(--ease) both; }
+
+.tx-cons h4 { margin: 14px 0 4px; font-family: var(--font-body); font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); font-weight: 500; }
+.tx-cons p, .tx-cons li { font-size: 0.88rem; }
+.tx-cons ul { margin: 0; padding-left: 18px; color: var(--ivory-2); }
+.tx-flag { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 8px; align-items: start; margin-bottom: 6px; font-size: 0.86rem; color: var(--ivory-2); }
+
+.tx-lists { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.tx-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.tx-chips .chip { text-transform: none; letter-spacing: 0.02em; font-size: 0.74rem; }
+.tx-chips .chip button { border: 0; background: transparent; color: inherit; padding: 0 0 0 4px; opacity: 0.6; }
+.tx-chips .chip button:hover { opacity: 1; }
+
+.tx-presets { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.tx-preset { padding: 16px 18px; border: 1px solid var(--line); border-radius: var(--r-md); background: var(--glass); cursor: pointer; transition: border-color 0.3s, transform 0.3s var(--ease); text-align: left; color: inherit; }
+.tx-preset:hover { border-color: var(--gold); transform: translateY(-2px); }
+.tx-preset.on { border-color: var(--gold); box-shadow: var(--shadow-gold); }
+.tx-preset .n { font-family: var(--font-display); font-size: 1.25rem; color: var(--ivory); }
+.tx-preset .d { font-size: 0.82rem; color: var(--ivory-3); margin-top: 6px; }
+
+.tx-matrix td { font-size: 0.78rem; vertical-align: top; }
+.tx-matrix tr.on td { background: rgba(201, 169, 97, 0.08); }
+.tx-matrix tr.na td { opacity: 0.45; }
+.tx-matrix tr { cursor: pointer; }
+
+@media (max-width: 1024px) { .tx-layout { grid-template-columns: 1fr; } .tx-toggles { grid-template-columns: repeat(2, minmax(0, 1fr)); } .tx-presets { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 680px) { .tx-toggles, .tx-presets, .tx-lists { grid-template-columns: 1fr; } }

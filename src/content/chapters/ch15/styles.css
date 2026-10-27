@@ -1,0 +1,26 @@
+/* Chapter 15 — The Family Office */
+.ch15-diagram-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.ch15-diagram-wrap svg { min-width: 680px; }
+.ch15-caption { font-size: 0.85rem; color: var(--ivory-3); margin-top: 10px; line-height: 1.55; }
+.ch15-legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 0.74rem; color: var(--ivory-3); margin-top: 8px; }
+.ch15-legend span::before { content: ''; display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: -1px; }
+.ch15-legend .info::before { background: var(--green-2); }
+.ch15-legend .dec::before { background: var(--blue); }
+.ch15-legend .own::before { background: var(--gold); }
+.ch15-legend .rep::before { background: var(--violet); }
+
+.ch15-models { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 900px) { .ch15-models { grid-template-columns: 1fr; } }
+.ch15-model { border: 1px solid var(--line); border-radius: var(--r-md); padding: 16px; background: var(--glass); display: flex; flex-direction: column; gap: 10px; }
+.ch15-model.typically { border-color: rgba(201,169,97,0.45); }
+.ch15-model h5 { margin: 0; font-family: var(--font-display); font-size: 1.3rem; color: var(--ivory); font-weight: 500; }
+.ch15-model .big { font-family: var(--font-mono); font-size: 1.35rem; color: var(--gold-2); }
+.ch15-model .bps { font-family: var(--font-mono); font-size: 0.85rem; color: var(--ivory-3); }
+.ch15-model p { margin: 0; font-size: 0.8rem; color: var(--ivory-2); line-height: 1.5; }
+.ch15-break { font-size: 0.76rem; color: var(--ivory-3); display: grid; grid-template-columns: 1fr auto; gap: 3px 10px; }
+.ch15-break .n { font-family: var(--font-mono); color: var(--ivory-2); text-align: right; }
+.ch15-cov { display: inline-block; width: 10px; height: 10px; border-radius: 50%; }
+.ch15-cov.in-house { background: var(--green-2); }
+.ch15-cov.outsourced { background: var(--blue); }
+.ch15-cov.partial { background: var(--amber); }
+.ch15-cov.none { background: transparent; border: 1px solid var(--line-strong); }
