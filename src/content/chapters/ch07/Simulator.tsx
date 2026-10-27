@@ -47,7 +47,7 @@ export default function Simulator() {
       {belowMarket && (
         <Callout tone="amber" title="Below-market loan rules may apply">
           <p className="small" style={{ margin: 0 }}>
-            The stated rate ({pct(ratePct / 100, 2)}) is below the AFR you entered ({pct(afrPct / 100, 2)}). Under IRC §7872 a gift loan at a below-market rate is treated as if the lender transferred the foregone interest to the borrower — roughly <strong>{fmt(foregone)}</strong> in year one on this balance — and the borrower paid it back as interest. That is a deemed gift to the borrower and deemed interest income to the lender. De minimis exceptions exist for aggregate loans of $10,000 or less, and gift loans of $100,000 or less are limited to the borrower\'s net investment income in some cases. Confirm the current AFR for the month the note is signed and the correct term bracket (short, mid or long).
+            The stated rate ({pct(ratePct / 100, 2)}) is below the AFR you entered ({pct(afrPct / 100, 2)}). Under IRC §7872 a gift loan at a below-market rate is treated as if the lender transferred the foregone interest to the borrower — roughly <strong>{fmt(foregone)}</strong> in year one on this balance — and the borrower paid it back as interest. That is a deemed gift to the borrower and deemed interest income to the lender. De minimis exceptions exist for aggregate loans of $10,000 or less, and gift loans of $100,000 or less are limited to the borrower's net investment income in some cases. Confirm the current AFR for the month the note is signed and the correct term bracket (short, mid or long).
           </p>
         </Callout>
       )}

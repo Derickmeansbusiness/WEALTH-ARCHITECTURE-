@@ -125,7 +125,7 @@ export default function Diagram() {
         </svg>
       </div>
       <p className="ch10-caption">
-        The red dashed ring is liability insurance, the first thing a claim meets: a premises injury, a product claim, a director\'s decision or a professional error is absorbed by the policy's limits and defence cover before any entity or trust is ever tested. The structures inside the ring are the second line, not the first. At the death event on the timeline, the green flow is life insurance owned by an irrevocable trust paying out income-tax free under §101(a) and outside the estate under §2042 — liquidity arriving exactly when the estate owes tax, debts and equalisation payments, so the business and the buildings are not sold to pay them.
+        The red dashed ring is liability insurance, the first thing a claim meets: a premises injury, a product claim, a director's decision or a professional error is absorbed by the policy's limits and defence cover before any entity or trust is ever tested. The structures inside the ring are the second line, not the first. At the death event on the timeline, the green flow is life insurance owned by an irrevocable trust paying out income-tax free under §101(a) and outside the estate under §2042 — liquidity arriving exactly when the estate owes tax, debts and equalisation payments, so the business and the buildings are not sold to pay them.
       </p>
     </div>
   );
