@@ -6,33 +6,12 @@ import { EmptyState } from '@/components/ui';
 import { fmtClock, useElapsedSeconds } from './visuals/motion';
 import './present.css';
 
-export const STAGE_W = 1920;
-export const STAGE_H = 1080;
+import { STAGE_W, STAGE_H, indexFromPath, cumulativeMinutes, pacing, clampIndex } from './engine';
+
+export { STAGE_W, STAGE_H, indexFromPath, cumulativeMinutes, pacing };
 const TRANSITION_MS = 600;
 
 type Dir = 'fwd' | 'back';
-
-/** Parse the 1-based slide number from a pathname under basePath. Returns 0-based index or 0. */
-export function indexFromPath(pathname: string, basePath: string): number {
-  const rest = pathname.startsWith(basePath) ? pathname.slice(basePath.length) : '';
-  const m = rest.match(/^\/?(\d+)/);
-  if (!m) return 0;
-  return Math.max(0, parseInt(m[1], 10) - 1);
-}
-
-/** Planned cumulative minutes at the start of each slide. */
-export function cumulativeMinutes(slides: Slide[]): number[] {
-  const out: number[] = []; let acc = 0;
-  for (const s of slides) { out.push(acc); acc += s.minutes ?? 1; }
-  return out;
-}
-
-/** Pacing verdict: 'on' within 60s of plan, 'ahead' or 'behind' otherwise, with the delta in seconds. */
-export function pacing(elapsedSeconds: number, plannedMinutesAtStart: number): { state: 'on' | 'ahead' | 'behind'; delta: number } {
-  const delta = elapsedSeconds - plannedMinutesAtStart * 60;
-  if (Math.abs(delta) < 60) return { state: 'on', delta };
-  return { state: delta > 0 ? 'behind' : 'ahead', delta };
-}
 
 /** A live slide rendered at a fixed 1920×1080 and scaled to `width`. Used for overview and presenter view. */
 export function SlideThumb({ slide, width, step, label }: { slide: Slide; width: number; step?: number; label?: ReactNode }) {
@@ -64,7 +43,7 @@ export default function Deck({ slides, basePath: rawBase }: { slides: Slide[]; b
 
   const count = slides.length;
   const rawIndex = indexFromPath(pathname, basePath);
-  const index = Math.min(Math.max(0, rawIndex), Math.max(0, count - 1));
+  const index = clampIndex(rawIndex, count);
   const slide = slides[index];
   const maxStep = Math.max(0, (slide?.steps ?? 1) - 1);
 

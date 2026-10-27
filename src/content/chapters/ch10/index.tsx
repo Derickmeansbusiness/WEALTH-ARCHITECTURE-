@@ -1,16 +1,155 @@
 import type { ChapterModule } from '@/types/content';
 import { CHAPTERS } from '../manifest';
-import { EmptyState } from '@/components/ui';
+import Diagram from './Diagram';
+import Simulator from './Simulator';
+import './styles.css';
 
 const meta = CHAPTERS.find((c) => c.id === 'ch10')!;
 
 const mod: ChapterModule = {
   content: {
-    id: meta.id, number: meta.number, slug: meta.slug, title: meta.title, subtitle: 'Content in production', objectives: ['governance'], duration: meta.duration,
-    hook: '', concept: [], realWorldExample: { title: '', body: [] }, misconception: { claim: '', reality: '', confidence: 'amber' }, professionalExplanation: [],
-    knowledgeCheck: [], caseStudy: { title: '', family: '', situation: '', structure: '', outcome: '', lesson: '' }, terminology: [], references: [], takeaways: [],
+    id: meta.id,
+    number: meta.number,
+    slug: meta.slug,
+    title: meta.title,
+    subtitle: 'Liability cover is the first line, not the last. Life insurance is liquidity, not growth. Everything else sold under the word "insurance" has to earn its place.',
+    objectives: ['asset-protection', 'estate-planning', 'succession', 'tax-planning'],
+    duration: meta.duration,
+    hook: 'Nobody has ever lost a family business to a lawsuit that the umbrella policy paid. They lose it to the one nobody bought.',
+    concept: [
+      'Before any trust, any LLC, any offshore structure, the first line of defence for a family balance sheet is **liability insurance** — and it is the line most often underbuilt, because it is boring and because people selling structures are not paid to sell it. A **personal umbrella** sits above auto and homeowners cover and responds to the ordinary catastrophes: the car accident, the guest injured at the lake house, the teenager\'s party. **Commercial general liability** does the same for the operating company\'s premises, products and operations. **Directors & officers** cover responds to claims against the people who make decisions for an entity, including the family members who sit on the board of the holding company and the trustees of the family trust. **Errors & omissions** or professional liability covers advice and services. Each policy pays two things that no entity structure can: the judgment up to its limit, and the **defence costs** that arrive long before any judgment. An LLC does not pay a lawyer. In my practice the families who ended up litigating veil-piercing were, almost without exception, families whose coverage limits were an order of magnitude below their net worth.',
+      'The second infrastructure role is **liquidity at death**. An estate rich in a business and real estate and poor in cash faces three bills at once: transfer tax (where the estate exceeds the exemption), debts and buy-sell obligations that come due, and **equalisation** — the heirs who will not receive the business expect something of equal value. **Life insurance** converts a stream of premiums into a known lump of cash on exactly the day those bills arrive. That is its job. The death benefit is excluded from the beneficiary\'s income under **§101(a)**, and if the policy is owned by an **irrevocable life insurance trust** in which the insured holds no **incidents of ownership** — no right to change the beneficiary, borrow against, surrender or assign the policy — the proceeds are also outside the insured\'s gross estate under **§2042**. A policy transferred into the trust rather than bought by it is pulled back if death occurs within three years (**§2035**); the trust should apply for the policy itself. Premiums are funded by gifts, usually structured with **Crummey withdrawal powers** so that they qualify for the gift tax annual exclusion. The ILIT then lends to the estate or buys assets from it; it does not simply hand the executor cash, because an obligation to pay estate debts would itself be an incident of ownership.',
+      '**Term versus permanent** is a question about the shape of the need, not about which product is "better". Term insurance is cheap because it usually expires before the insured dies; it is the right instrument for needs that end — a mortgage, children\'s dependency, a buy-sell during a transition, a key-person exposure while a successor is trained. Permanent insurance (whole life, universal life and its variants) is expensive because it is designed to be in force at death; it is the right instrument for a need that is certain to exist at death and cannot be dated — estate tax on a business the family will never sell. The economic test for permanent cover is the policy\'s **internal rate of return to the expected date of death**, after its mortality charges and expenses, compared with what the premium difference would earn elsewhere. For a healthy insured in their fifties with a genuine permanent need, that return is often respectable and tax-advantaged; for someone buying it as an investment with no need for the death benefit, it is usually poor. **§7702** defines what counts as life insurance for these tax benefits, and **§7702A** classifies over-funded contracts as modified endowment contracts, under which loans and withdrawals are taxed as income first and may carry a penalty — the statute\'s way of saying that a policy stuffed with cash to avoid tax on investment income is not what the exclusion was for.',
+      'That brings us to **policy loans**, which are the most misunderstood feature in the entire field. A loan against cash value is a **debt**: it accrues interest at the insurer\'s rate, it reduces the death benefit dollar for dollar if not repaid, and if the policy lapses or is surrendered with the loan outstanding, the gain in the contract becomes taxable income in that year — frequently with no cash to pay the tax, because the cash went out as the loan. The strategies marketed as "**infinite banking**" or "**be your own bank**" take a real feature — the ability to borrow against cash value without a credit check and without a taxable event while the policy stays in force — and present it as cost-free capital. It is not. The cost is the premium load and mortality charges in the early years (which make the cash value lag premiums paid, often for a decade), the spread between the loan rate and the crediting rate, and the opportunity cost of the capital. There are families for whom a well-designed, modestly over-funded whole life policy is a sensible place to hold a liquidity reserve; I have never seen one for whom it was a substitute for a business, a property portfolio or a diversified investment account. The salespeople who say otherwise are paid by the premium.',
+      'Two specialised instruments appear at the top of the balance-sheet range. **Private placement life insurance** is a variable policy, available to accredited investors, with institutional pricing and access to alternative investments inside the separate account. Its appeal is that income and gains inside the policy accumulate without current tax and pass income-tax free at death under §101(a). Its constraints are real: the separate account must meet the **diversification rules of §817(h)**, and the policyholder must not exercise **investor control** over the underlying assets — the IRS has litigated this (Rev. Rul. 2003-91 and 2003-92; *Webber v. Commissioner* (2015), where the taxpayer\'s direction of specific investments caused him to be taxed on the income directly). PPLI is a tool for balance sheets in the tens of millions with investments that would otherwise be taxed at ordinary rates; below that scale, the fixed costs defeat it.',
+      '**Captive insurance companies** — a family\'s own insurer, writing cover for its operating businesses — are legitimate when they insure real risks at actuarially supported premiums with genuine risk distribution. The small-captive election under **§831(b)**, which exempts underwriting income below an indexed threshold from tax, has been abused heavily enough that the IRS has placed micro-captives on its annual list of abusive schemes, designated certain arrangements as reportable transactions and won the leading Tax Court cases: *Avrahami* (2017), *Reserve Mechanical* (2018, affirmed 2022), *Syzygy* (2019) and *Caylor* (2021), each turning on implausible premiums, circular funds flow, or risk that was never really distributed. A captive is an insurance company first. A family that wants one must be willing to run it like one — independent actuary, real claims, real capital — or it is a deduction waiting to be disallowed with penalties.',
+      'The last infrastructure role is **buy-sell funding**, and the law here changed recently. When co-owners agree that the survivors will buy a deceased owner\'s shares, life insurance is the natural funding source. Two designs exist: **cross-purchase** (each owner holds a policy on the others) and **entity redemption** (the company holds the policies and redeems the shares). In *Connelly v. United States* (2024) the Supreme Court held that life insurance proceeds received by a corporation to fund a redemption are included in the corporation\'s value for estate tax purposes, with no offset for the redemption obligation — so a redemption-funded buy-sell can increase the very estate tax it was meant to pay. Cross-purchase designs, or an insurance LLC owned by the shareholders, avoid the problem but have their own complexity and the **transfer-for-value rule** of §101(a)(2) to navigate when policies change hands. Every buy-sell agreement drafted before 2024 deserves a re-read in light of *Connelly*.',
+      'Put together, the picture is of insurance as **infrastructure rather than product**: a liability layer outside the entities that absorbs the ordinary disasters, a liquidity layer that arrives at death so that nothing is sold under duress, and a small number of specialised instruments that make sense only at scale and only when run honestly. The errors are consistent and predictable: liability limits set a decade ago; policies owned personally and therefore inside the estate; term policies that will expire years before the need; over-funded permanent policies sold as investments without disclosing the cost drag; redemption buy-sells that now raise the estate\'s value; captives with premiums that no actuary would sign. None of this is exotic. It is the discipline of asking, for each policy, what event it is for, who owns it, who it pays, and what it costs over the period until that event.',
+    ],
+    realWorldExample: {
+      title: 'A $40 million estate with $6 million of cash',
+      body: [
+        'A founder\'s estate is roughly $40 million: a manufacturing company worth $26 million, real estate worth $8 million, and $6 million of marketable securities and cash. Eighty-five percent is illiquid. Her advisers estimate that after the exemption she expects to have available — the figure changes with legislation and with the gifts she has made, so they model it as an input — about $25 million is taxable at an effective 40%, for **$10 million of federal transfer tax**. Settlement costs run about 2% ($800,000). Her two children who do not work in the business are to receive equalising bequests, and the shareholder agreement obliges the estate to sell her shares to her co-founder; together these create about **$1.5 million** of cash obligations beyond the tax.',
+        'Total cash need at death: about **$12.3 million**. Liquidity available: **$6 million**. The gap is **$6.3 million** — roughly 19% of the illiquid estate. Without insurance, the executor sells a building in a hurry or borrows against the company at the worst possible moment, or elects §6166 deferral and runs the business for a decade with the IRS as a creditor.',
+        'An ILIT applies for a $7 million second-to-die policy on the founder and her husband. Because the trust applies, there is no three-year inclusion risk. Annual premiums of, say, $120,000 are funded by gifts to the trust that qualify for the annual exclusion through Crummey notices to the three children. At the second death the trust receives $7 million income-tax free under §101(a), outside both estates under §2042, and lends it to the estate against a note secured by the real estate, or buys shares from the estate at appraised value. The tax is paid; the company is not sold; the equalising bequests are funded.',
+        'The arithmetic that matters is the cost: perhaps $3 million of premiums over 25 years for $7 million of benefit arriving at an uncertain date, versus the alternative of investing those premiums and hoping the portfolio is large enough and liquid enough on the day. For a need that is certain to exist and cannot be dated, the policy\'s internal return to a reasonable life expectancy is usually competitive with a bond portfolio, and it is the only instrument that pays in full if death comes early. For a need that might not exist — if the estate shrinks below the exemption, or the business is sold — term cover during the transition and a reserve may be the better answer. The example is not a recommendation; it is the shape of the calculation.',
+      ],
+    },
+    misconception: {
+      claim: '"An over-funded whole life policy lets you be your own bank: borrow tax-free whenever you like, pay yourself the interest, and build wealth faster than investing."',
+      reality: 'A policy loan is debt against your own cash value, charged interest by the insurer, reducing the death benefit until repaid; if the policy lapses with a loan outstanding, the gain is taxable with no cash to pay it. Over-funding past the §7702A limits makes the contract a modified endowment contract, taxing loans and withdrawals as income first. Early-year loads and mortality charges mean cash value trails premiums for years. A well-designed permanent policy can be a sensible liquidity reserve with tax-deferred growth for a family that also needs the death benefit; it is not a bank, and the "interest you pay yourself" is paid to the insurer.',
+      confidence: 'red',
+    },
+    professionalExplanation: [
+      'The adviser\'s first pass is a **coverage audit** of the liability layer: umbrella limits relative to net worth and lifestyle exposures (teen drivers, waterfront property, boats), whether the umbrella sits over every underlying policy including the rental properties and the LLC-owned vehicles, CGL and product cover for the operating company, D&O for the holding company board and for trustees, E&O for any advisory activity, and whether the entities are correctly named as insureds. This is cheap insurance for the structure itself, because a claim paid by a policy is a claim that never tests the LLC veil or the trust\'s spendthrift clause.',
+      'The second pass is the **liquidity projection**: a current estate valuation, the exemption expected to be available after prior gifts, state estate or inheritance tax, marital and charitable deductions in the plan, debts and buy-sell obligations, equalisation intentions, and the growth of the estate to life expectancy. The tax questions here are specific: whether the policy will be owned by an ILIT from inception (avoiding §2035), whether the insured holds any incident of ownership under §2042 and the regulations (including through a controlled corporation), whether the trust\'s gifts qualify for the annual exclusion (Crummey notices actually sent), whether a split-dollar or premium-financing arrangement is in play and how its economic benefit is reported, and whether the trust\'s purchase of estate assets or loans to the estate are drafted to avoid the proceeds being treated as receivable by the estate.',
+      'The third pass is **product scrutiny**. Term quotes against permanent illustrations run at the guaranteed and current assumptions, with the internal rate of return on the death benefit computed to several ages. For permanent policies, the §7702 test the contract uses and the §7702A seven-pay limits, the loan provisions and crediting rates, surrender charges, and what happens to the death benefit under loans. For PPLI, the §817(h) diversification compliance and the investor-control documentation. For a captive, an independent feasibility study, actuarial pricing, real claims handling and awareness that the IRS treats many §831(b) arrangements as reportable transactions with penalties for non-disclosure. For buy-sell funding, a review of the agreement\'s design in light of *Connelly* and of the transfer-for-value exceptions if policies will be moved between owners.',
+      'Professionals are required at each pass: a property and casualty broker who will put limits in writing against a net-worth statement; estate counsel to draft the ILIT, Crummey provisions and any loan or purchase mechanics; a CPA to coordinate gift tax reporting, split-dollar or financing arrangements and §6166 alternatives; and an insurance adviser whose compensation is disclosed — ideally fee-based for the analysis, with the product purchased on the merits afterwards. Where a captive or PPLI is contemplated, specialist tax counsel is mandatory, and the family should expect to hear "no" more often than "yes".',
+    ],
+    knowledgeCheck: [
+      {
+        id: 'ch10-q1',
+        prompt: 'Why is liability insurance described as the "first line of defence" ahead of entity and trust structures?',
+        options: [
+          'Because it is legally required before forming an LLC.',
+          'Because a policy pays the judgment up to its limit and the defence costs before any entity veil or trust clause is ever tested, and no structure pays a lawyer.',
+          'Because insurance proceeds are always excluded from the estate.',
+          'Because it replaces the need for a holding company.',
+        ],
+        answer: 1,
+        explanation: 'Structures compartmentalise what a claim can reach once litigation happens; insurance absorbs the ordinary claims so that litigation against the structure never happens. Underbuilt limits are the most common reason families end up testing their structures in court.',
+      },
+      {
+        id: 'ch10-q2',
+        prompt: 'A founder personally owns a $5 million life policy payable to her children. Which statement is correct?',
+        options: [
+          'The proceeds are excluded from her gross estate because they are paid to the children.',
+          'The proceeds are included in her gross estate under §2042 because she holds incidents of ownership; transferring the policy to an ILIT removes them only if she survives three years (§2035), whereas a policy the ILIT applies for from inception avoids that rule.',
+          'The children owe income tax on the $5 million under §101(a).',
+          'The policy must be owned by the company to be excluded.',
+        ],
+        answer: 1,
+        explanation: 'Incidents of ownership (right to change beneficiary, borrow, surrender, assign) cause inclusion regardless of who the beneficiary is. §101(a) excludes the proceeds from income tax, not from the estate. A new policy applied for by the trust avoids the three-year rule.',
+      },
+      {
+        id: 'ch10-q3',
+        prompt: 'What is the most accurate description of a loan taken against the cash value of a permanent life policy?',
+        options: [
+          'Tax-free income that never has to be repaid.',
+          'A debt from the insurer secured by the cash value, accruing interest, reducing the death benefit until repaid, and producing taxable gain if the policy later lapses or is surrendered with the loan outstanding (and taxed as income first if the contract is a modified endowment contract).',
+          'A withdrawal of basis that permanently increases the death benefit.',
+          'A deductible interest expense for the policyholder.',
+        ],
+        answer: 1,
+        explanation: 'The loan is not income while the policy is in force because it is debt, not a distribution. Its cost is the interest and the reduced benefit; its risk is lapse with a loan outstanding. §7702A applies income-first treatment to MECs. Personal policy loan interest is generally not deductible.',
+      },
+      {
+        id: 'ch10-q4',
+        prompt: 'Two co-owners fund their buy-sell with corporate-owned life insurance under a redemption agreement. After Connelly v. United States (2024), what is the estate tax consequence when one dies?',
+        options: [
+          'The proceeds are ignored in valuing the company.',
+          'The proceeds increase the corporation\'s value for estate tax purposes with no offset for the redemption obligation, potentially raising the deceased owner\'s estate tax.',
+          'The proceeds are taxed as income to the surviving owner.',
+          'The redemption is treated as a gift to the survivor.',
+        ],
+        answer: 1,
+        explanation: 'The Supreme Court held the redemption obligation does not reduce the value of the corporation for estate tax, so the insurance inflates the value of the decedent\'s shares. Cross-purchase or insurance-LLC designs avoid the issue, subject to the transfer-for-value rule when policies move.',
+      },
+      {
+        id: 'ch10-q5',
+        prompt: 'A family\'s adviser proposes a §831(b) captive insurance company whose premiums would roughly equal the operating company\'s taxable income, insuring risks the company has never experienced. What is the main concern?',
+        options: [
+          'Captives are illegal for family businesses.',
+          'The arrangement shows the hallmarks the IRS and the Tax Court have treated as abusive — premiums unrelated to actuarial risk, little real risk distribution, circular funds — and may be a reportable transaction with penalties; a legitimate captive insures real risks at supportable premiums and is run as an insurer.',
+          'The premiums will be taxed to the children.',
+          'Captives cannot elect §831(b) if the owners are related.',
+        ],
+        answer: 1,
+        explanation: 'Avrahami, Reserve Mechanical, Syzygy and Caylor all turned on premiums and risk pools that no independent actuary would support. The §831(b) election is lawful; using it as a deduction machine is not, and the IRS has designated certain micro-captive arrangements as reportable transactions.',
+      },
+    ],
+    caseStudy: {
+      title: 'The Brennan-Osei Liquidity Plan',
+      family: 'Siobhan Brennan (62) and Kwame Osei (64), owners of a regional commercial construction company with roughly $32 million of equity value, plus $9 million of real estate and $5 million of marketable assets; three children, one of whom runs the company\'s operations.',
+      situation: 'A liability review found a $2 million personal umbrella over a household with four drivers, two boats and a lake house, no D&O cover for the holding company board the children had just joined, and a CGL policy whose limits had not moved since 2009. On the estate side, their projection showed roughly $11 million of transfer tax exposure after the exemptions they expected, against $5 million of liquid assets, and a shareholder agreement with a redemption-funded buy-sell written in 2011. Kwame also owned a $3 million whole life policy personally, sold to him a decade earlier as a "private banking" vehicle, with a $600,000 loan outstanding.',
+      structure: 'The liability layer was rebuilt first: a $10 million umbrella, D&O for the holding company and the trust\'s trustees, CGL and excess limits sized to the company\'s contract values. An ILIT applied for a $9 million survivorship policy; premiums are funded by annual-exclusion gifts to the trust with Crummey notices, and the trust instrument authorises loans to and purchases from either estate. Kwame\'s existing policy was transferred to the ILIT with eyes open about the §2035 three-year window and the loan was repaid from marketable assets rather than left to erode the benefit. The buy-sell was converted from redemption to a cross-purchase funded through an insurance LLC owned by the shareholders, after counsel reviewed the transfer-for-value exceptions. Equalisation for the two children outside the business was written into the estate plan as a formula bequest to be satisfied from the ILIT\'s purchase of real estate from the estate.',
+      outcome: 'Eighteen months later a subcontractor\'s employee was seriously injured on a company site; the claim settled within the CGL and excess limits, and the holding company and trust were never named. The liquidity gap, re-run with the new coverage, is now within the range the marketable portfolio can absorb even if the estate grows. The three children understand which of them receives the company, how the other two are made whole, and where the cash comes from. Kwame\'s comment on the old policy was that nobody had ever shown him the loan interest and the lapse risk on one page.',
+      lesson: 'The sequence mattered: liability limits first because they are cheap and the exposure is daily; liquidity second because it is the difference between a succession and a fire sale; product scrutiny third because the family already owned something they did not understand. The redemption buy-sell was a time bomb that nobody had re-read in a decade. Insurance is infrastructure; it needs the same periodic inspection as the roof.',
+    },
+    terminology: [
+      { term: 'Umbrella liability policy', definition: 'Excess personal liability cover that sits above auto, homeowners and other underlying policies, responding to large claims and defence costs.' },
+      { term: 'Commercial general liability (CGL)', definition: 'Business liability cover for bodily injury, property damage and certain personal/advertising injury arising from premises, operations and products.' },
+      { term: 'Directors & officers (D&O)', definition: 'Cover for claims against individuals for decisions made in their capacity as directors, officers, managers or trustees, and often for the entity itself.' },
+      { term: 'Incidents of ownership', definition: 'Rights over a policy — to change beneficiaries, borrow, surrender, assign or pledge — that cause the proceeds to be included in the insured\'s gross estate under IRC §2042.' },
+      { term: 'Irrevocable life insurance trust (ILIT)', definition: 'An irrevocable trust that owns and is beneficiary of a life policy so the proceeds are outside the insured\'s estate; premiums are typically funded by gifts qualifying for the annual exclusion through Crummey powers.' },
+      { term: 'Crummey power', definition: 'A beneficiary\'s temporary right to withdraw a contribution to a trust, which makes the gift one of a present interest eligible for the gift tax annual exclusion (Crummey v. Commissioner, 9th Cir. 1968).' },
+      { term: 'Three-year rule (§2035)', definition: 'Inclusion in the gross estate of life insurance transferred by the insured within three years of death; avoided when the trust applies for the policy itself.' },
+      { term: 'Modified endowment contract (MEC)', definition: 'A life policy that fails the seven-pay test of IRC §7702A because of over-funding; loans and withdrawals are taxed income-first and may carry a 10% additional tax before age 59½.' },
+      { term: 'Policy loan', definition: 'A loan from the insurer secured by the policy\'s cash value, accruing interest and reducing the death benefit until repaid; not income while the policy remains in force.' },
+      { term: 'Private placement life insurance (PPLI)', definition: 'Variable life insurance for accredited investors with institutional pricing and alternative investments in the separate account, subject to §817(h) diversification and the investor-control doctrine.' },
+      { term: 'Captive insurance company', definition: 'An insurer owned by the insured or its affiliates; legitimate when it insures real risks at actuarial premiums with risk distribution. §831(b) small captives have attracted IRS enforcement.' },
+      { term: 'Transfer-for-value rule', definition: 'IRC §101(a)(2): if a policy is transferred for valuable consideration, the death benefit loses its income-tax exclusion beyond the consideration and premiums paid, subject to listed exceptions (e.g., transfers to the insured or to a partner of the insured).' },
+    ],
+    references: [
+      { title: 'Certain death benefits; transfer-for-value rule', citation: '26 U.S.C. § 101(a), (a)(2)', jurisdiction: 'United States (federal)', type: 'statute', note: 'Income tax exclusion of life insurance proceeds and its exceptions.' },
+      { title: 'Proceeds of life insurance; adjustments for certain gifts within 3 years of death', citation: '26 U.S.C. §§ 2042, 2035; Treas. Reg. § 20.2042-1', jurisdiction: 'United States (federal)', type: 'statute', note: 'Estate inclusion for incidents of ownership and transferred policies.' },
+      { title: 'Life insurance contract defined; modified endowment contract defined', citation: '26 U.S.C. §§ 7702, 7702A, 72(e)(10)', jurisdiction: 'United States (federal)', type: 'statute', note: 'Definitional tests and the taxation of loans and distributions from MECs.' },
+      { title: 'Connelly v. United States', citation: '602 U.S. ___ (2024)', jurisdiction: 'United States (Supreme Court)', type: 'case', note: 'Corporate-owned life insurance funding a redemption increases corporate value for estate tax with no offset for the redemption obligation.' },
+      { title: 'Crummey v. Commissioner', citation: '397 F.2d 82 (9th Cir. 1968)', jurisdiction: 'United States (9th Cir.)', type: 'case', note: 'Withdrawal powers create present interests qualifying trust contributions for the annual exclusion.' },
+      { title: 'Investor control over separate-account assets', citation: 'Rev. Rul. 2003-91; Rev. Rul. 2003-92; Webber v. Commissioner, 144 T.C. 324 (2015); 26 U.S.C. § 817(h)', jurisdiction: 'United States (federal)', type: 'case', note: 'Limits on policyholder control and diversification requirements for variable and private placement life insurance.' },
+      { title: 'Micro-captive insurance arrangements', citation: 'Avrahami v. Commissioner, 149 T.C. 144 (2017); Reserve Mechanical Corp. v. Commissioner (10th Cir. 2022); 26 U.S.C. § 831(b); IRS reportable-transaction guidance on micro-captives', jurisdiction: 'United States (federal)', type: 'case', note: 'Leading authority on when a captive is not insurance for tax purposes and the IRS disclosure regime.' },
+      { title: 'Extension of time for payment of estate tax where estate consists largely of interest in closely held business', citation: '26 U.S.C. § 6166', jurisdiction: 'United States (federal)', type: 'statute', note: 'The statutory deferral alternative to insurance-funded liquidity.' },
+    ],
+    takeaways: [
+      'Liability insurance is the first line of defence: it pays judgments and defence costs before any entity or trust is tested, and limits should be sized against net worth and re-checked annually.',
+      'Life insurance is liquidity at death, not growth: it exists so that tax, debts and equalisation are paid without selling the business or the buildings under duress.',
+      'For the proceeds to be outside the estate, an ILIT should own the policy from inception with no incidents of ownership retained (§2042) and the three-year rule (§2035) in mind; §101(a) keeps the benefit income-tax free.',
+      'Term for needs that end, permanent for needs that are certain at death; judge permanent cover by its internal return to life expectancy after costs, and treat policy loans as the debt they are — "infinite banking" omits the cost drag.',
+      'PPLI and captives are tools for large balance sheets run honestly under §817(h), the investor-control doctrine and the §831(b) case law; and after Connelly, every redemption-funded buy-sell deserves a re-read.',
+    ],
   },
-  Diagram: () => <EmptyState title="Diagram in production" />,
-  Simulator: () => <EmptyState title="Simulator in production" />,
+  Diagram,
+  Simulator,
 };
+
 export default mod;

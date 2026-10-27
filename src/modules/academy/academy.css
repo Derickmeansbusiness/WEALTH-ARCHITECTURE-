@@ -164,8 +164,11 @@
 .acad-formula { font-family: var(--font-mono); font-size: 0.78rem; color: var(--ivory-3); padding: 10px 12px; border: 1px dashed var(--line-strong); border-radius: var(--r-sm); background: rgba(0,0,0,0.3); line-height: 1.7; overflow-x: auto; white-space: pre-wrap; }
 
 /* Simulator layout */
-.acad-sim { display: grid; grid-template-columns: minmax(0, 320px) minmax(0, 1fr); gap: 20px; align-items: start; }
-@media (max-width: 900px) { .acad-sim { grid-template-columns: 1fr; } }
+.acad-sim { display: grid; grid-template-columns: minmax(0, 320px) minmax(0, 1fr); gap: 20px; align-items: start; min-width: 0; }
+.acad-sim > * { min-width: 0; }
+.acad-sim .stack, .acad-sim .field, .acad-sim .row { min-width: 0; }
+.acad-sim .row.between > .input { min-width: 0; flex: 1 1 auto; }
+@media (max-width: 900px) { .acad-sim { grid-template-columns: minmax(0, 1fr); } }
 .acad-sim-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
 .acad-flag { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 10px; align-items: start; padding: 10px 12px; border-radius: var(--r-sm); border: 1px solid var(--line); background: var(--glass); font-size: 0.86rem; }
 .acad-flag.red { border-color: rgba(194,90,76,0.4); }
