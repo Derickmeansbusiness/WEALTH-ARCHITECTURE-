@@ -213,7 +213,7 @@ export function MachineModel() {
         {/* machine icon */}
         <g transform={`translate(${L + 4} ${T})`} opacity={0.9}>
           <rect width={44} height={28} rx={4} fill="rgba(201,169,97,0.12)" stroke={GOLD} />
-          <circle cx={14} cy={14} r={6} fill="none" stroke={GOLD} strokeDasharray="3 3" style={{ transformOrigin: '14px 14px', animation: 'spin 3s linear infinite' }} />
+          <circle cx={14} cy={14} r={6} fill="none" stroke={GOLD} strokeDasharray="3 3" style={{ transformOrigin: '14px 14px', animation: 'dsSpin 3s linear infinite' }} />
           <rect x={26} y={8} width={12} height={12} fill="none" stroke={GOLD} />
         </g>
       </Frame>

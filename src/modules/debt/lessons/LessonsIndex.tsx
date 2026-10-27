@@ -12,7 +12,7 @@ export default function LessonsIndex() {
     <div className="container ds-page">
       <SectionHeader eyebrow="Nine lessons · about five hours" title="The debt curriculum" lede="From the anatomy of a loan to the debt policy of an institutional family. Each lesson has visuals, an interactive, key terms, a misconception, a knowledge check and jurisdiction notes for the mode you have selected." />
       <div className="row between" style={{ marginBottom: 24 }}>
-        <div style={{ flex: 1, maxWidth: 420 }} className="row" style-x="">
+        <div style={{ flex: 1, maxWidth: 420 }}>
           <div style={{ flex: 1 }}><ProgressBar value={done / DEBT_LESSONS.length} /></div>
           <span className="tiny muted mono">{done}/{DEBT_LESSONS.length} complete</span>
         </div>

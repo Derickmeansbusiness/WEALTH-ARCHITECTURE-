@@ -58,7 +58,7 @@ const TOPIC_KEYWORDS: { topic: Topic; words: [RegExp, number][] }[] = [
   { topic: 'insurance', words: [[/\binsurance\b/i, 3], [/\bwhole life|universal life|term life\b/i, 3], [/\bpolicy (loan|loans)\b/i, 3], [/\bcash value\b/i, 3], [/\binfinite banking|be your own bank/i, 3], [/\bpremiums?\b/i, 2], [/\bumbrella\b/i, 2], [/\bilit\b/i, 3]] },
   { topic: 'real-estate', words: [[/\breal estate\b/i, 3], [/\brental|rentals|landlord|tenant/i, 2], [/\bdepreciation\b/i, 3], [/\bcost segregation\b/i, 3], [/\b1031\b/, 2], [/\bproperty|properties\b/i, 1], [/\bhouse|home\b/i, 1], [/\bmortgage\b/i, 1], [/\breal estate professional/i, 3]] },
   { topic: 'family-banking', words: [[/\bfamily bank(ing)?\b/i, 4], [/\blend(ing)? to (your|my|the) (kids|children|family)/i, 3], [/\bintra[- ]family\b/i, 3], [/\bafr\b|applicable federal rate/i, 3], [/\bpromissory note\b/i, 2], [/\bloan to (my|your|the) (son|daughter|kids|children)/i, 3], [/\bfamily loan/i, 3]] },
-  { topic: 'asset-protection', words: [[/\basset protection\b/i, 4], [/\bcreditors?\b/i, 3], [/\blawsuits?|sued|judgment\b/i, 2], [/\bcharging order\b/i, 3], [/\bdapt\b/i, 3], [/\bprotect(s|ed|ing)? (your|my) (assets|wealth|money)\b/i, 3], [/\bbulletproof|untouchable|judgment[- ]proof/i, 2], [/\bfraudulent transfer/i, 3]] },
+  { topic: 'asset-protection', words: [[/\basset protection\b/i, 4], [/\bcreditors?\b/i, 3], [/\blawsuits?|sued|judgment\b/i, 2], [/\bcharging order\b/i, 3], [/\bdapt\b/i, 3], [/\bprotect(s|ed|ing|ion)?\b/i, 2], [/\bprotect(s|ed|ing)? (your|my) (assets|wealth|money)\b/i, 2], [/\bbulletproof|untouchable|judgment[- ]proof/i, 2], [/\bfraudulent transfer/i, 3]] },
   { topic: 'offshore', words: [[/\boffshore\b/i, 4], [/\bcook islands|nevis|cayman|belize|bvi|bermuda|jersey|guernsey|isle of man\b/i, 3], [/\bdubai|uae|abu dhabi|difc|adgm\b/i, 3], [/\bswitzerland|swiss|singapore|liechtenstein\b/i, 2], [/\bforeign trust\b/i, 3], [/\bfbar|3520\b/i, 3], [/\btax haven/i, 3]] },
   { topic: 'succession', words: [[/\bsuccession\b/i, 3], [/\binherit(ance)?\b/i, 3], [/\bheirs?\b/i, 2], [/\bestate (tax|plan|planning)\b/i, 3], [/\bprobate\b/i, 3], [/\bgift(ing|s)?\b/i, 2], [/\bwill\b(?! (be|not|never|always))/i, 1], [/\bnext generation|generations?\b/i, 1], [/\bstep[- ]up/i, 1]] },
   { topic: 'governance', words: [[/\bgovernance\b/i, 4], [/\bfamily (council|constitution|charter|meeting|assembly)\b/i, 4], [/\bvalues|mission\b/i, 1], [/\bdecision[- ]making\b/i, 2], [/\bconflict\b/i, 1], [/\bshirtsleeves/i, 3], [/\bthird generation\b/i, 2]] },
@@ -73,7 +73,7 @@ export function normalize(raw: string): string {
     .replace(TIMESTAMP, ' ')
     .replace(/\[(music|applause|laughter|inaudible|crosstalk)[^\]]*\]/gi, ' ')
     .split('\n')
-    .map((line) => line.replace(SPEAKER, '').trim())
+    .map((line) => line.trim().replace(SPEAKER, '').trim())
     .filter(Boolean)
     .join('\n')
     .replace(/[ \t]+/g, ' ')
@@ -146,7 +146,8 @@ export function mergeShort(sentences: string[], below: number): string[] {
 
 export function segmentTranscript(raw: string, options: SegmentOptions = {}): CandidateClaim[] {
   const o = { ...DEFAULTS, ...options };
-  const sentences = splitSentences(normalize(raw)).map(stripFillers).filter((s) => s && !FRAGMENT.test(s));
+  // Questions and fragments are dropped before merging so they cannot ride along inside a longer candidate.
+  const sentences = splitSentences(normalize(raw)).map(stripFillers).filter((s) => s && !FRAGMENT.test(s) && !/\?\s*$/.test(s));
   const merged = mergeShort(sentences, o.mergeBelow).filter((s) => s.length >= o.minLength);
   const out: CandidateClaim[] = [];
   const seen = new Set<string>();
