@@ -102,6 +102,7 @@ html.present-active body::before { display: none; }
 .present-side { flex: none; width: 420px; border-left: 1px solid var(--line); background: var(--bg-1); padding: 18px; display: flex; flex-direction: column; gap: 14px; overflow: auto; z-index: 55; }
 .present-side h5 { font-family: var(--font-body); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin: 0; font-weight: 500; }
 .present-side .present-clock { font-family: var(--font-mono); font-size: 34px; color: var(--ivory); letter-spacing: 0.04em; }
+.present-side .present-meta { display: flex; gap: 14px; font-family: var(--font-mono); font-size: 12px; color: var(--ivory-3); flex-wrap: wrap; }
 
 /* ── Thumbnails (scaled live slides) ──────────────────────── */
 .present-thumb { position: relative; width: 100%; aspect-ratio: 16 / 9; overflow: hidden; border: 1px solid var(--line); border-radius: 10px; background: var(--bg-0); contain: strict; }
