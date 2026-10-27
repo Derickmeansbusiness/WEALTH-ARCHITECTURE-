@@ -133,6 +133,11 @@
   .lab-views { left: 8px; right: 8px; }
 }
 @media (max-width: 680px) {
+  .lab-views { justify-content: flex-start; }
+  .lab-views > div { flex-wrap: nowrap; overflow-x: auto; max-width: calc(100% - 150px); scrollbar-width: none; }
+  .lab-views > div::-webkit-scrollbar { display: none; }
+  .lab-views .btn.sm { white-space: nowrap; }
+  .lab-drawer-bar { top: 12px; }
   .lab-toolbar { gap: 4px; padding: 6px 8px; }
   .lab-toolbar .hide-sm { display: none; }
   .lab-name { max-width: 150px; font-size: 0.95rem; }
